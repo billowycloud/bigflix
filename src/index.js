@@ -1,12 +1,3 @@
-const Koa = require("koa");
-const app = new Koa();
-const PORT = 4000;
-
-app.use((ctx, next) => {
-  console.log(1);
-  next();
-});
-
-app.listen(PORT, () => {
-  console.log("Listening to port: " + PORT);
-});
+// Set options as a parameter, environment variable, or rc file.
+require = require("esm")(module /*, options*/);
+module.exports = require("./main.js");
