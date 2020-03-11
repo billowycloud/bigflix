@@ -1,11 +1,26 @@
+require("dotenv").config(); //.env 파일에서 환경 변수 불러오기
 import Koa from "koa"; //const Koa = require("koa");
 import Router from "koa-router";
 import api from "./api";
 import bodyParser from "koa-bodyparser";
+import mongoose from "mongoose";
 
+const { PORT, MONGO_URI } = process.env;
 const app = new Koa();
-const PORT = 4000;
 const router = new Router();
+
+mongoose
+  .connect(MONGO_URI, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useFindAndModify: false
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch(e => {
+    console.log(`DB Connection Error: ${e.message}`);
+  });
 
 //라우터 설정
 router.use("/api", api.routes());
@@ -15,6 +30,8 @@ app
   .use(router.routes()) //라우터 적용
   .use(router.allowedMethods());
 
-app.listen(PORT, () => {
-  console.log("Listening to port: " + PORT);
+//포트 미지정시 4000 사용
+const port = PORT || 4000;
+app.listen(port, () => {
+  console.log("Listening to port: %d", port);
 });
