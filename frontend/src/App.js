@@ -1,7 +1,14 @@
 import React from "react";
+import Router from "./Components/Router";
+import GlobalStyles from "./Components/Globalstyles";
 
 const App = () => {
-  return <div>리액트 동작 체크</div>;
+  return (
+    <>
+      <GlobalStyles />
+      <Router />
+    </>
+  );
 };
 
 export default App;
