@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 const GlobalStyles = createGlobalStyle`
   ${reset};
   a {
@@ -18,6 +18,9 @@ const GlobalStyles = createGlobalStyle`
     background: rgba(20, 20, 20, 1);
     color: white;
   }
+  html {
+    height: 100%;
+}
 `;
 
 export default GlobalStyles;

@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
+import Header from '../../Components/Header';
 
 const TVPresenter = () => {
-  return <div>이건 TV화면</div>;
+  return <Header />;
 };
 
 export default TVPresenter;

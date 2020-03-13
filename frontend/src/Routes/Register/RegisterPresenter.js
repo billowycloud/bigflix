@@ -2,7 +2,7 @@ import React from 'react';
 import AuthTemplate from '../Auth/AuthTemplate';
 import AuthForm from '../Auth/AuthForm';
 
-const LoginPresenter = () => {
+const RegisterPresenter = () => {
   return (
     <AuthTemplate>
       <AuthForm />
@@ -10,4 +10,4 @@ const LoginPresenter = () => {
   );
 };
 
-export default LoginPresenter;
+export default RegisterPresenter;

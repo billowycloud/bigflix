@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
+import Header from '../../Components/Header';
 
 const MoviePresenter = () => {
-  return <div>이건 영화 화면</div>;
+  return <Header />;
 };
 
 export default MoviePresenter;

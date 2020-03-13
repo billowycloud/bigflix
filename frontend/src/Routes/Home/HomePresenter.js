@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
+import Header from '../../Components/Header';
 
 const HomePresenter = () => {
-  return <div>이건 홈페이지</div>;
+  return <Header />;
 };
 
 export default HomePresenter;
