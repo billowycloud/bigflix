@@ -5,7 +5,7 @@ import AuthForm from '../Auth/AuthForm';
 const RegisterPresenter = () => {
   return (
     <AuthTemplate>
-      <AuthForm />
+      <AuthForm type="register" />
     </AuthTemplate>
   );
 };

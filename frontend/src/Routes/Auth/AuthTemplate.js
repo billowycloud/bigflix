@@ -20,12 +20,12 @@ const Block = styled.div`
 
 const AuthBox = styled.div`
   img {
-    padding-bottom: 2rem;
+    margin-bottom: 2rem;
   }
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
   padding: 2rem;
-  width: 360px;
-  background: green;
+  width: 500px;
+  background: rgba(0, 0, 0, 0.8);
   border-radius: 2px;
 `;
 

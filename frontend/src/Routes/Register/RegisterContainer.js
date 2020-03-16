@@ -1,7 +1,8 @@
 import React from 'react';
+import RegisterPresenter from './RegisterPresenter';
 
 const RegisterContainer = () => {
-  return <div></div>;
+  return <RegisterPresenter />;
 };
 
 export default RegisterContainer;
