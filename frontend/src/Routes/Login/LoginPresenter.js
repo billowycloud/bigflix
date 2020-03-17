@@ -1,11 +1,16 @@
-import React from 'react';
-import AuthTemplate from '../Auth/AuthTemplate';
-import AuthForm from '../Auth/AuthForm';
+import React from "react";
+import AuthForm from "../../Components/Auth/AuthForm";
+import AuthTemplate from "../../Components/Auth/AuthTemplate";
 
-const LoginPresenter = () => {
+const LoginPresenter = ({ form, onChange, onSubmit }) => {
   return (
     <AuthTemplate>
-      <AuthForm type="login" />
+      <AuthForm
+        type="login"
+        form={form}
+        onChange={onChange}
+        onSubmit={onSubmit}
+      ></AuthForm>
     </AuthTemplate>
   );
 };

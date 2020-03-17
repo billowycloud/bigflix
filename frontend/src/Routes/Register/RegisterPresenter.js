@@ -1,13 +1,8 @@
-import React from 'react';
-import AuthTemplate from '../Auth/AuthTemplate';
-import AuthForm from '../Auth/AuthForm';
+import React from "react";
+import AuthForm from "../../Components/Auth/AuthForm";
 
 const RegisterPresenter = () => {
-  return (
-    <AuthTemplate>
-      <AuthForm type="register" />
-    </AuthTemplate>
-  );
+  return <AuthForm type="register"></AuthForm>;
 };
 
 export default RegisterPresenter;

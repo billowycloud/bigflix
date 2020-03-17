@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const Block = styled.div`
   h1 {
@@ -54,40 +54,46 @@ const Footer = styled.div`
 `;
 
 const textMap = {
-  login: '로그인',
-  register: '회원가입'
+  login: "로그인",
+  register: "회원가입"
 };
 
-const AuthForm = ({ type }) => {
+const AuthForm = ({ type, form, onChange, onSubmit }) => {
   const text = textMap[type];
   return (
     <Block>
       <h1>{text}</h1>
-      <Form>
+      <Form onSubit={onSubmit}>
         <Input
           autoComplete="email"
           placeholder="이메일 입력"
           type="email"
-          name="email"
+          name="username"
+          onChange={onChange}
+          value={form.username}
         ></Input>
         <Input
-          autoComplete="password"
+          autoComplete="new-password"
           placeholder="비밀번호 입력"
-          name="new-password"
+          name="password"
           type="password"
+          onChange={onChange}
+          value={form.password}
         ></Input>
-        {type === 'register' && (
+        {type === "register" && (
           <Input
-            autoComplete="password"
+            autoComplete="new-password-check"
             placeholder="비밀번호 다시 입력"
-            name="check-password"
+            name="passwordConfirm"
             type="password"
+            onChange={onChange}
+            value={form.passwordConfirm}
           />
         )}
-        <Button>{type === 'login' ? text : '등록'}</Button>
+        <Button>{type === "login" ? text : "등록"}</Button>
       </Form>
       <Footer>
-        {type === 'login' ? (
+        {type === "login" ? (
           <Link to="/register">회원가입</Link>
         ) : (
           <Link to="/login">로그인</Link>
