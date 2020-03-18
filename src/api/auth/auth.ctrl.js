@@ -4,14 +4,14 @@ import User from '../../models/user';
 /*
     POST /api/auth/register
     {
-        email: '계정명',
+        email: '계정명(이메일)',
         password: '비밀번호'
     }
 */
 export const register = async ctx => {
   const schema = Joi.object().keys({
     email: Joi.string()
-      .email({ minDomainSegments: 2 })
+      .email()
       .required(),
     password: Joi.string().required()
   });
