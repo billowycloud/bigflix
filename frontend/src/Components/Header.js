@@ -1,8 +1,10 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
-import styled from "styled-components";
-import logo from "../Images/logo.png";
-import Search from "../Routes/Search";
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import styled from 'styled-components';
+import logo from '../Images/logo.png';
+import Search from '../Routes/Search';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../modules/user';
 
 const HeaderBlock = styled.header`
   color: white;
@@ -35,7 +37,7 @@ const Item = styled.li`
   height: 60px;
   text-align: center;
   border-bottom: 4px solid
-    ${props => (props.current ? "#e50914" : "transparent")};
+    ${props => (props.current ? '#e50914' : 'transparent')};
   transition: border-bottom 0.5s ease-in-out;
   & + & {
     margin-left: 0.5rem;
@@ -64,29 +66,43 @@ const UserInfo = styled.div`
   margin-left: 3rem;
 `;
 
-export default withRouter(({ location: { pathname } }) => (
-  <HeaderBlock>
-    <Wrapper>
-      <List>
-        <Item>
-          <SLink to="/browse">
-            <Img src={logo} alt="logo" />
-          </SLink>
-        </Item>
-        <Item current={pathname === "/browse"}>
-          <SLink to="/browse">홈</SLink>
-        </Item>
-        <Item current={pathname === "/browse/tv"}>
-          <SLink to="/browse/tv">TV 프로그램</SLink>
-        </Item>
-        <Item current={pathname === "/browse/movie"}>
-          <SLink to="/browse/movie">영화</SLink>
-        </Item>
-      </List>
-      <RightBlock>
-        <Search />
-        <UserInfo>User</UserInfo>
-      </RightBlock>
-    </Wrapper>
-  </HeaderBlock>
-));
+const Header = ({ location: { pathname } }) => {
+  const { user } = useSelector(({ user }) => ({ user: user.user }));
+  const dispatch = useDispatch();
+  const onLogout = () => {
+    dispatch(logout());
+  };
+  return (
+    <HeaderBlock>
+      <Wrapper>
+        <List>
+          <Item>
+            <SLink to="/browse">
+              <Img src={logo} alt="logo" />
+            </SLink>
+          </Item>
+          <Item current={pathname === '/browse'}>
+            <SLink to="/browse">홈</SLink>
+          </Item>
+          <Item current={pathname === '/browse/tv'}>
+            <SLink to="/browse/tv">TV 프로그램</SLink>
+          </Item>
+          <Item current={pathname === '/browse/movie'}>
+            <SLink to="/browse/movie">영화</SLink>
+          </Item>
+        </List>
+        <RightBlock>
+          <Search />
+          {user ? <UserInfo>{user.email}</UserInfo> : <UserInfo>...</UserInfo>}
+          {user ? (
+            <button onClick={onLogout}>로그아웃</button>
+          ) : (
+            <button>...</button>
+          )}
+        </RightBlock>
+      </Wrapper>
+    </HeaderBlock>
+  );
+};
+
+export default withRouter(Header);

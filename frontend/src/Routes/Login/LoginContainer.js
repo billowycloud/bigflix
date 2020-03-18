@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import LoginPresenter from "./LoginPresenter";
-import { initializeForm, changeFiled, login } from "../../modules/auth";
-import { check } from "../../modules/user";
-import { withRouter } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import LoginPresenter from './LoginPresenter';
+import { initializeForm, changeFiled, login } from '../../modules/auth';
+import { check } from '../../modules/user';
+import { withRouter } from 'react-router-dom';
 
 const LoginContainer = ({ history }) => {
   const [error, setError] = useState(null);
@@ -19,7 +19,7 @@ const LoginContainer = ({ history }) => {
     const { value, name } = e.target;
     dispatch(
       changeFiled({
-        form: "login",
+        form: 'login',
         key: name,
         value
       })
@@ -33,25 +33,30 @@ const LoginContainer = ({ history }) => {
   };
 
   useEffect(() => {
-    dispatch(initializeForm("login"));
+    dispatch(initializeForm('login'));
   }, [dispatch]);
 
   useEffect(() => {
     if (authError) {
-      console.log("오류 발생");
+      console.log('오류 발생');
       console.log(authError);
-      setError("가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.");
+      setError('가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.');
       return;
     }
     if (auth) {
-      console.log("로그인 성공");
+      console.log('로그인 성공');
       dispatch(check());
     }
   }, [auth, authError, dispatch]);
 
   useEffect(() => {
     if (user) {
-      history.push("/browse");
+      history.push('/browse');
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (e) {
+        console.log(e + ': localStorage is not working');
+      }
     }
   }, [history, user]);
 

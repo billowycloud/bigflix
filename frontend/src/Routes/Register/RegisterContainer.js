@@ -71,6 +71,11 @@ const RegisterContainer = ({ history }) => {
   useEffect(() => {
     if (user) {
       history.push('/browse');
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (e) {
+        console.log(e + ': localStorage is not working');
+      }
     }
   }, [history, user]);
 
