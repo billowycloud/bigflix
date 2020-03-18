@@ -53,24 +53,29 @@ const Footer = styled.div`
   }
 `;
 
+const ErrorMessage = styled.div`
+  margin-top: 0.5rem;
+  color: red;
+`;
+
 const textMap = {
   login: "로그인",
   register: "회원가입"
 };
 
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
+const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
   const text = textMap[type];
   return (
     <Block>
       <h1>{text}</h1>
-      <Form onSubit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <Input
           autoComplete="email"
           placeholder="이메일 입력"
           type="email"
-          name="username"
+          name="email"
           onChange={onChange}
-          value={form.username}
+          value={form.email}
         ></Input>
         <Input
           autoComplete="new-password"
@@ -90,6 +95,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
             value={form.passwordConfirm}
           />
         )}
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <Button>{type === "login" ? text : "등록"}</Button>
       </Form>
       <Footer>
