@@ -1,9 +1,9 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
-import styled from "styled-components";
-import logo from "../Images/logo.png";
-import Search from "../Routes/Search";
-import Profile from "./Profile";
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import styled from 'styled-components';
+import logo from '../Images/logo.png';
+import Search from './RightHeader/Search';
+import Account from './RightHeader/Account';
 
 const HeaderBlock = styled.header`
   color: white;
@@ -36,7 +36,7 @@ const Item = styled.li`
   height: 60px;
   text-align: center;
   border-bottom: 4px solid
-    ${props => (props.current ? "#e50914" : "transparent")};
+    ${props => (props.current ? '#e50914' : 'transparent')};
   transition: border-bottom 0.5s ease-in-out;
   & + & {
     margin-left: 0.5rem;
@@ -82,13 +82,13 @@ const Header = ({ location: { pathname } }) => {
               <Img src={logo} alt="logo" />
             </SLink>
           </Item>
-          <Item current={pathname === "/browse"}>
+          <Item current={pathname === '/browse'}>
             <SLink to="/browse">홈</SLink>
           </Item>
-          <Item current={pathname === "/browse/tv"}>
+          <Item current={pathname === '/browse/tv'}>
             <SLink to="/browse/tv">TV 프로그램</SLink>
           </Item>
-          <Item current={pathname === "/browse/movie"}>
+          <Item current={pathname === '/browse/movie'}>
             <SLink to="/browse/movie">영화</SLink>
           </Item>
         </List>
@@ -97,7 +97,7 @@ const Header = ({ location: { pathname } }) => {
             <Search />
           </RightItem>
           <RightItem>
-            <Profile />
+            <Account />
           </RightItem>
         </RightBlock>
       </Wrapper>
