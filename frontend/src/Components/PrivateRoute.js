@@ -10,8 +10,13 @@ const PrivateRoute = ({ history, path, component, ...rest }) => {
   useEffect(() => {
     if (!user) {
       history.push('/');
+      try {
+        localStorage.setItem('user', JSON.stringify(user));
+      } catch (e) {
+        console.log(e + ': localStorage is not working');
+      }
     }
-  }, [user]);
+  }, [history, user]);
 
   return <Route path={path} component={component} {...rest}></Route>;
 };
