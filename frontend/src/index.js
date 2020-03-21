@@ -7,6 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { tempSetUser, check } from './modules/user';
+import './lib/api/movie';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
