@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import logo from '../Images/logo.png';
 import Search from './RightHeader/Search';
 import Account from './RightHeader/Account';
@@ -35,9 +35,21 @@ const Item = styled.li`
   width: 9rem;
   height: 60px;
   text-align: center;
-  border-bottom: 4px solid
-    ${props => (props.current ? '#e50914' : 'transparent')};
-  transition: border-bottom 0.5s ease-in-out;
+  color: rgba(255, 255, 255, 0.8);
+  ${props =>
+    props.current &&
+    css`
+      font-weight: bold;
+      font-size: 1.3rem;
+      color: rgb(255, 255, 255);
+    `}
+
+  &:hover {
+    opacity: 0.5;
+    font-size: 1.3rem;
+    color: #ff7675;
+    transition: all 0.2s ease-in-out;
+  }
   & + & {
     margin-left: 0.5rem;
   }
