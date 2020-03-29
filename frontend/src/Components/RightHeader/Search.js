@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import searchWhite from '../../Images/search_white.png';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 const SearchBlock = styled.div`
   position: relative;
@@ -12,36 +12,26 @@ const SearchBlock = styled.div`
 `;
 
 const InputBox = styled.div`
+  border: ${props => (props.hide ? '1px solid white' : 'none')};
+  ${props =>
+    props.hide
+      ? css`
+          animation: ${ImageFade} 0.2s ease-in-out;
+        `
+      : css`
+          animation: ${ImageFadeR} 0.2s ease-in-out;
+        `}
+
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   right: 0;
-  border: 1.5px solid white;
-  border-radius: 10px;
-
-  button {
-    overflow: visible;
-    cursor: pointer;
-    border: none;
-    outline: none;
-
-    background: transparent;
-  }
-
-  .searchImage:before {
-    content: '';
-    display: block;
-    background-image: url(${searchWhite});
-    background-position: center center;
-    background-size: cover;
-    width: 40px;
-    height: 40px;
-  }
+  cursor: pointer;
 `;
 
 const Form = styled.form`
-  display: flex;
+  display: ${props => (props.hide ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
 
@@ -55,14 +45,38 @@ const Form = styled.form`
   }
 `;
 
+const SearchIcon = styled.img`
+  width: 40px;
+  height: 40px;
+`;
+
+const ImageFade = keyframes`
+from{
+  width: 0rem;
+}
+to{
+  width: 13rem;
+}
+`;
+
+const ImageFadeR = keyframes`
+from{
+  width: 13rem;
+}
+to{
+  width: 0;
+}
+`;
+
 const Search = () => {
+  const [isOpen, setIsOpen] = useState(false); //Search탭 오픈 유무
+  const toggle = () => setIsOpen(!isOpen);
+
   return (
     <SearchBlock>
-      <InputBox>
-        <button>
-          <span className="searchImage"></span>
-        </button>
-        <Form>
+      <InputBox hide={isOpen}>
+        <SearchIcon src={searchWhite} onClick={toggle} />
+        <Form hide={isOpen}>
           <input placeholder="제목, 장르"></input>
         </Form>
       </InputBox>
