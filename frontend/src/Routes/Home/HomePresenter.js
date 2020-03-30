@@ -1,10 +1,10 @@
-import React from 'react';
-import Header from '../../Components/Header';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import Loader from "../../Components/Loader";
 
-const HomeBlock = styled.div``;
+const Block = styled.div``;
 
-const HomeHeader = styled.div`
+const Header = styled.div`
   background: green;
   height: 45rem;
   /* random movie and tv [latest] */
@@ -15,13 +15,17 @@ const Test = styled.div`
   font-size: 10rem;
 `;
 
-const HomePresenter = () => {
-  return (
-    <HomeBlock>
-      <HomeHeader />
+const HomePresenter = ({ result, loading, error }) => {
+  return loading ? (
+    <Loader />
+  ) : (
+    <Block>
       <Header />
-      <Test>홈화면 테스트</Test>
-    </HomeBlock>
+      {console.log(result.popularMovie)}
+      {result && result.popularMovie && result.popularMovie.length > 0 && (
+        <Test>{result.popularMovie.map(content => content.title)}</Test>
+      )}
+    </Block>
   );
 };
 
