@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import searchWhite from '../../Images/search_white.png';
-import styled, { keyframes, css } from 'styled-components';
+import React, { useState } from "react";
+import searchWhite from "../../Images/search_white.png";
+import styled, { keyframes, css } from "styled-components";
 
 const SearchBlock = styled.div`
   position: relative;
@@ -12,15 +12,12 @@ const SearchBlock = styled.div`
 `;
 
 const InputBox = styled.div`
-  border: ${props => (props.hide ? '1px solid white' : 'none')};
+  border: ${props => (props.hide ? "1px solid white" : "none")};
   ${props =>
-    props.hide
-      ? css`
-          animation: ${ImageFade} 0.2s ease-in-out;
-        `
-      : css`
-          animation: ${ImageFadeR} 0.2s ease-in-out;
-        `}
+    props.hide &&
+    css`
+      animation: ${ImageFade} 0.2s ease-in-out;
+    `}
 
   display: flex;
   justify-content: center;
@@ -31,7 +28,7 @@ const InputBox = styled.div`
 `;
 
 const Form = styled.form`
-  display: ${props => (props.hide ? 'flex' : 'none')};
+  display: ${props => (props.hide ? "flex" : "none")};
   justify-content: center;
   align-items: center;
 

@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
+import Section from "../../Components/Contents/Section";
+import Poster from "../../Components/Contents/Poster";
 
-const Block = styled.div``;
+const Block = styled.div`
+  padding: 40px;
+  padding-top: 0;
+`;
 
 const Header = styled.div`
   background: green;
@@ -10,22 +15,27 @@ const Header = styled.div`
   /* random movie and tv [latest] */
 `;
 
-const Test = styled.div`
-  color: white;
-  font-size: 10rem;
-`;
-
 const HomePresenter = ({ result, loading, error }) => {
   return loading ? (
     <Loader />
   ) : (
-    <Block>
+    <>
       <Header />
-      {console.log(result.popularMovie)}
-      {result && result.popularMovie && result.popularMovie.length > 0 && (
-        <Test>{result.popularMovie.map(content => content.title)}</Test>
-      )}
-    </Block>
+      <Block>
+        {result && result.popularMovie && result.popularMovie.length > 0 && (
+          <Section title="현재 인기 영화">
+            {result.popularMovie.map(content => (
+              <Poster
+                key={content.id}
+                id={content.id}
+                title={content.title}
+                imgUrl={content.poster_path}
+              />
+            ))}
+          </Section>
+        )}
+      </Block>
+    </>
   );
 };
 
