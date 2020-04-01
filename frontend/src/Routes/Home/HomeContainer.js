@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import HomePresenter from "./HomePresenter";
-import { homeApi } from "../../lib/api/home";
+import { movieApi, tvApi } from "../../lib/api/home";
 
 const HomeContainer = () => {
   const [result, setResult] = useState(null);
@@ -12,29 +12,34 @@ const HomeContainer = () => {
       try {
         const {
           data: { results: popularMovie }
-        } = await homeApi.popularMovie();
+        } = await movieApi.popularMovie();
         const {
           data: { results: popularTV }
-        } = await homeApi.popularTV();
+        } = await tvApi.popularTV();
         const {
           data: { results: latestMovie }
-        } = await homeApi.latestMovie();
+        } = await movieApi.latestMovie();
         const {
           data: { results: topRatedMovie }
-        } = await homeApi.topRatedMovie();
+        } = await movieApi.topRatedMovie();
         const {
           data: { results: topRatedTV }
-        } = await homeApi.topRatedTV();
+        } = await tvApi.topRatedTV();
         const {
           data: { results: airingTodayTV }
-        } = await homeApi.airingTodayTV();
+        } = await tvApi.airingTodayTV();
+        const {
+          data: { genres: getGenre }
+        } = await movieApi.getGenre();
+
         setResult({
           popularMovie,
           popularTV,
           latestMovie,
           topRatedMovie,
           topRatedTV,
-          airingTodayTV
+          airingTodayTV,
+          getGenre
         });
       } catch (e) {
         setError(e + "영화 정보를 찾을 수 없습니다.");

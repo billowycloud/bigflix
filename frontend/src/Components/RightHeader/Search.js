@@ -56,15 +56,6 @@ to{
 }
 `;
 
-const ImageFadeR = keyframes`
-from{
-  width: 13rem;
-}
-to{
-  width: 0;
-}
-`;
-
 const Search = () => {
   const [isOpen, setIsOpen] = useState(false); //Search탭 오픈 유무
   const toggle = () => setIsOpen(!isOpen);

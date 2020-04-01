@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-const Block = styled.div``;
+const Block = styled.div`
+  margin-bottom: 3rem;
+`;
 const Title = styled.div`
   font-weight: bold;
+  margin-bottom: 0.8rem;
 `;
 const Contents = styled.div`
   overflow-y: hidden;
