@@ -1,6 +1,7 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
-
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import backStar from '../../Images/backStar.png';
+import fillStar from '../../Images/fillStar.png';
 const FadeIn = keyframes`
   from {
     opacity: 0;
@@ -11,7 +12,7 @@ const FadeIn = keyframes`
 `;
 
 const DetailBlock = styled.div`
-  width: 180px;
+  width: 200px;
   overflow: hidden;
   opacity: 0;
   position: absolute;
@@ -29,6 +30,7 @@ const Img = styled.div`
 `;
 const Block = styled.div`
   position: relative;
+
   &:hover {
     ${DetailBlock} {
       opacity: 1;
@@ -37,6 +39,9 @@ const Block = styled.div`
     ${Img} {
       opacity: 0.3;
     }
+  }
+  &:not(:last-child) {
+    margin-right: 0.3rem;
   }
 `;
 const Title = styled.h3`
@@ -49,23 +54,44 @@ const Year = styled.p`
   margin-bottom: 0.3rem;
 `;
 
+const RatingBlock = styled.div`
+  display: flex;
+`;
+
 const Rating = styled.div`
-  width: 70%;
-  height: 20px;
-  border-radius: 25px;
+  width: 100px;
+  height: 25px;
   position: relative;
-  .backStar {
-    width: 100%;
-    height: 20px;
-    position: absolute;
-    background: gray;
-  }
-  .fillStar {
-    width: ${props => props.rating * 10}%;
-    height: 20px;
-    position: absolute;
-    background: yellow;
-  }
+`;
+
+const BackStar = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 25px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+`;
+
+const FillStar = styled.div`
+  position: absolute;
+  width: ${props => props.rating * 10}%;
+  height: 25px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+`;
+
+const SImg = styled.img`
+  width: 20px;
+  margin: 0;
+`;
+const Score = styled.span`
+  width: 20px;
+  margin-left: 0.2rem;
+  line-height: 25px;
+  font-size: 1.2rem;
 `;
 
 const Poster = ({ id, title, imgUrl, rating, year, isMovie }) => {
@@ -75,10 +101,25 @@ const Poster = ({ id, title, imgUrl, rating, year, isMovie }) => {
       <DetailBlock>
         <Title>{title}</Title>
         <Year>{year}</Year>
-        <Rating rating={rating}>
-          <div className="backStar" />
-          <div className="fillStar" />
-        </Rating>
+        <RatingBlock>
+          <Rating>
+            <BackStar>
+              <SImg src={backStar} />
+              <SImg src={backStar} />
+              <SImg src={backStar} />
+              <SImg src={backStar} />
+              <SImg src={backStar} />
+            </BackStar>
+            <FillStar rating={rating}>
+              <SImg src={fillStar} />
+              <SImg src={fillStar} />
+              <SImg src={fillStar} />
+              <SImg src={fillStar} />
+              <SImg src={fillStar} />
+            </FillStar>
+          </Rating>
+          <Score>{rating}</Score>
+        </RatingBlock>
       </DetailBlock>
     </Block>
   );

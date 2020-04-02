@@ -1,16 +1,15 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 const Block = styled.div`
   margin-bottom: 3rem;
 `;
 const Title = styled.div`
+  font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 0.8rem;
 `;
 const Contents = styled.div`
-  overflow-y: hidden;
-  transition: transform 450ms;
-  overflow-x: scroll;
+  overflow-x: hidden;
   display: flex;
   width: 95vw;
   overflow: -moz-scrollbars-horizontal;

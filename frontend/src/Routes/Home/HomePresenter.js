@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import Loader from "../../Components/Loader";
-import Section from "../../Components/Contents/Section";
-import Poster from "../../Components/Contents/Poster";
+import React from 'react';
+import styled from 'styled-components';
+import Loader from '../../Components/Loader';
+import Section from '../../Components/Contents/Section';
+import Poster from '../../Components/Contents/Poster';
 
 const Block = styled.div`
   padding: 40px;
