@@ -1,7 +1,7 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
-import backStar from "../../assets/backStar.png";
-import fillStar from "../../assets/fillStar.png";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import backStar from '../../assets/backStar.png';
+import fillStar from '../../assets/fillStar.png';
 const FadeIn = keyframes`
   from {
     opacity: 0;
@@ -27,31 +27,45 @@ const Img = styled.div`
   background-position: center center;
   width: 200px;
   height: 300px;
+  transition: width 0.5s, height 0.5s;
+  -webkit-transition: width 0.5s, height 0.5s;
+`;
+
+const Title = styled.h3`
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  white-space: normal;
+  line-height: 1.4rem;
+`;
+
+const Year = styled.p`
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+`;
+const ImgWrapper = styled.div`
+  height: 400px;
+  display: flex;
+  align-items: center;
 `;
 const Block = styled.div`
   position: relative;
-
   &:hover {
     ${DetailBlock} {
       opacity: 1;
       animation: ${FadeIn} 0.3s ease-in-out;
+      width: 270px;
     }
+
     ${Img} {
       opacity: 0.3;
+      width: 270px;
+      height: 400px;
     }
   }
   &:not(:last-child) {
     margin-right: 0.3rem;
   }
-`;
-const Title = styled.h3`
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 0.8rem;
-`;
-const Year = styled.p`
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
 `;
 
 const RatingBlock = styled.div`
@@ -97,7 +111,9 @@ const Score = styled.span`
 const Poster = ({ id, title, imgUrl, rating, year, isMovie }) => {
   return (
     <Block>
-      <Img posterUrl={`https://image.tmdb.org/t/p/w500/${imgUrl}`} />
+      <ImgWrapper>
+        <Img posterUrl={`https://image.tmdb.org/t/p/w500/${imgUrl}`} />
+      </ImgWrapper>
       <DetailBlock>
         <Title>{title}</Title>
         <Year>{year}</Year>

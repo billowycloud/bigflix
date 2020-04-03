@@ -1,10 +1,10 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
-import styled, { css } from "styled-components";
-import logo from "../assets/logo.png";
-import Search from "./RightHeader/Search";
-import Account from "./RightHeader/Account";
-
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import logo from '../assets/logo.png';
+import Search from './RightHeader/Search';
+import Account from './RightHeader/Account';
+import { useScroll } from '../lib/hooks/useScroll';
 const HeaderBlock = styled.header`
   color: white;
   position: fixed;
@@ -14,9 +14,8 @@ const HeaderBlock = styled.header`
   height: 60px;
   display: flex;
   align-items: center;
-  background: rgba(20, 20, 20, 0.8);
+  background: rgb(20, 20, 20);
   z-index: 10;
-  box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.8);
 `;
 
 const Wrapper = styled.div`
@@ -85,8 +84,15 @@ const RightItem = styled.div`
 `;
 
 const Header = ({ location: { pathname } }) => {
+  const { y } = useScroll();
   return (
-    <HeaderBlock>
+    <HeaderBlock
+      style={{
+        background:
+          y < 50 &&
+          'linear-gradient(to bottom, rgb(12,12,12),rgba(12,12,12,0.4), transparent)'
+      }}
+    >
       <Wrapper>
         <List>
           <Item>
@@ -94,13 +100,13 @@ const Header = ({ location: { pathname } }) => {
               <Img src={logo} alt="logo" />
             </SLink>
           </Item>
-          <Item current={pathname === "/browse"}>
+          <Item current={pathname === '/browse'}>
             <SLink to="/browse">홈</SLink>
           </Item>
-          <Item current={pathname === "/browse/tv"}>
+          <Item current={pathname === '/browse/tv'}>
             <SLink to="/browse/tv">TV 프로그램</SLink>
           </Item>
-          <Item current={pathname === "/browse/movie"}>
+          <Item current={pathname === '/browse/movie'}>
             <SLink to="/browse/movie">영화</SLink>
           </Item>
         </List>
