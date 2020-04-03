@@ -1,7 +1,7 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import backStar from '../../Images/backStar.png';
-import fillStar from '../../Images/fillStar.png';
+import React from "react";
+import styled, { keyframes } from "styled-components";
+import backStar from "../../assets/backStar.png";
+import fillStar from "../../assets/fillStar.png";
 const FadeIn = keyframes`
   from {
     opacity: 0;

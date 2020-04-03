@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import logo from '../../Images/logo.png';
-import background from '../../Images/mainBackground.jpg';
+import React from "react";
+import styled from "styled-components";
+import logo from "../../assets/logo.png";
+import background from "../../assets/mainBackground.jpg";
 
 const Block = styled.div`
   position: absolute;

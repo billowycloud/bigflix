@@ -2,7 +2,6 @@ import { Kor } from "./language";
 
 export const movieApi = {
   popularMovie: () => Kor.get("movie/popular"),
-  latestMovie: () => Kor.get("movie/latest"),
   topRatedMovie: () => Kor.get("movie/top_rated"),
   movieDetail: id =>
     Kor.get(`movie/${id}`, {

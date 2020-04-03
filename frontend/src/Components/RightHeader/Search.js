@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import searchWhite from "../../Images/search_white.png";
+import searchWhite from "../../assets/search_white.png";
 import styled, { keyframes, css } from "styled-components";
 
 const SearchBlock = styled.div`

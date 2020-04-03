@@ -1,16 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
-import Loader from '../../Components/Loader';
-import Section from '../../Components/Contents/Section';
-import Poster from '../../Components/Contents/Poster';
+import React from "react";
+import styled from "styled-components";
+import Loader from "../../Components/Loader";
+import Section from "../../Components/Contents/Section";
+import Poster from "../../Components/Contents/Poster";
 
 const Block = styled.div`
-  padding: 40px;
-  padding-top: 0;
+  margin-top: 1rem;
+  padding-left: 4%;
+  padding-right: 4%;
 `;
 
 const Header = styled.div`
-  background: green;
+  background: url("https://image.tmdb.org/t/p/original/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg");
+  background-position: center center;
+  background-size: cover;
   height: 45rem;
   /* random movie and tv [latest] */
 `;
@@ -48,21 +51,6 @@ const HomePresenter = ({ result, loading, error }) => {
                 rating={content.vote_average}
                 year={content.first_air_date.substring(0, 4)}
                 isMovie={false}
-              />
-            ))}
-          </Section>
-        )}
-        {result && result.latestMovie && result.latestMovie.length > 0 && (
-          <Section title="최신 영화">
-            {result.latestMovie.map(content => (
-              <Poster
-                key={content.id}
-                id={content.id}
-                title={content.title}
-                imgUrl={content.poster_path}
-                rating={content.vote_average}
-                year={content.release_date.substring(0, 4)}
-                isMovie={true}
               />
             ))}
           </Section>

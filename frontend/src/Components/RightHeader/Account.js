@@ -1,9 +1,9 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../modules/user';
-import styled from 'styled-components';
-import profile from '../../Images/profile.png';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../modules/user";
+import styled from "styled-components";
+import profile from "../../assets/profile.png";
+import { Link } from "react-router-dom";
 
 const AccountBlock = styled.div`
   position: relative;

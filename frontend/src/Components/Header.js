@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import styled, { css } from 'styled-components';
-import logo from '../Images/logo.png';
-import Search from './RightHeader/Search';
-import Account from './RightHeader/Account';
+import React from "react";
+import { Link, withRouter } from "react-router-dom";
+import styled, { css } from "styled-components";
+import logo from "../assets/logo.png";
+import Search from "./RightHeader/Search";
+import Account from "./RightHeader/Account";
 
 const HeaderBlock = styled.header`
   color: white;
@@ -94,13 +94,13 @@ const Header = ({ location: { pathname } }) => {
               <Img src={logo} alt="logo" />
             </SLink>
           </Item>
-          <Item current={pathname === '/browse'}>
+          <Item current={pathname === "/browse"}>
             <SLink to="/browse">홈</SLink>
           </Item>
-          <Item current={pathname === '/browse/tv'}>
+          <Item current={pathname === "/browse/tv"}>
             <SLink to="/browse/tv">TV 프로그램</SLink>
           </Item>
-          <Item current={pathname === '/browse/movie'}>
+          <Item current={pathname === "/browse/movie"}>
             <SLink to="/browse/movie">영화</SLink>
           </Item>
         </List>
