@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import backStar from '../../assets/backStar.png';
 import fillStar from '../../assets/fillStar.png';
+
 const FadeIn = keyframes`
   from {
     opacity: 0;
@@ -12,28 +13,25 @@ const FadeIn = keyframes`
 `;
 
 const DetailBlock = styled.div`
-  width: 200px;
   overflow: hidden;
   opacity: 0;
   position: absolute;
-  bottom: 0;
+  bottom: 1rem;
   left: 0;
-  padding: 20px;
+  padding: 2rem;
+  width: 100%;
 `;
 
-const Img = styled.div`
-  background-image: url(${props => props.posterUrl});
-  background-size: cover;
-  background-position: center center;
-  width: 200px;
-  height: 300px;
+const Img = styled.img`
+  height: 70%;
   transition: width 0.5s, height 0.5s;
   -webkit-transition: width 0.5s, height 0.5s;
 `;
 
 const Title = styled.h3`
+  width: 100%;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   margin-bottom: 0.8rem;
   white-space: normal;
   line-height: 1.4rem;
@@ -43,24 +41,23 @@ const Year = styled.p`
   font-size: 1.2rem;
   margin-bottom: 0.3rem;
 `;
+
 const ImgWrapper = styled.div`
-  height: 400px;
+  position: relative;
+  height: 30rem;
   display: flex;
   align-items: center;
 `;
+
 const Block = styled.div`
-  position: relative;
   &:hover {
     ${DetailBlock} {
       opacity: 1;
-      animation: ${FadeIn} 0.3s ease-in-out;
-      width: 270px;
+      animation: ${FadeIn} 0.8s ease-in-out;
     }
-
     ${Img} {
       opacity: 0.3;
-      width: 270px;
-      height: 400px;
+      height: 100%;
     }
   }
   &:not(:last-child) {
@@ -112,31 +109,31 @@ const Poster = ({ id, title, imgUrl, rating, year, isMovie }) => {
   return (
     <Block>
       <ImgWrapper>
-        <Img posterUrl={`https://image.tmdb.org/t/p/w500/${imgUrl}`} />
+        <Img src={`https://image.tmdb.org/t/p/w500/${imgUrl}`} />
+        <DetailBlock>
+          <Title>{title}</Title>
+          <Year>{year}</Year>
+          <RatingBlock>
+            <Rating>
+              <BackStar>
+                <SImg src={backStar} />
+                <SImg src={backStar} />
+                <SImg src={backStar} />
+                <SImg src={backStar} />
+                <SImg src={backStar} />
+              </BackStar>
+              <FillStar rating={rating}>
+                <SImg src={fillStar} />
+                <SImg src={fillStar} />
+                <SImg src={fillStar} />
+                <SImg src={fillStar} />
+                <SImg src={fillStar} />
+              </FillStar>
+            </Rating>
+            <Score>{rating}</Score>
+          </RatingBlock>
+        </DetailBlock>
       </ImgWrapper>
-      <DetailBlock>
-        <Title>{title}</Title>
-        <Year>{year}</Year>
-        <RatingBlock>
-          <Rating>
-            <BackStar>
-              <SImg src={backStar} />
-              <SImg src={backStar} />
-              <SImg src={backStar} />
-              <SImg src={backStar} />
-              <SImg src={backStar} />
-            </BackStar>
-            <FillStar rating={rating}>
-              <SImg src={fillStar} />
-              <SImg src={fillStar} />
-              <SImg src={fillStar} />
-              <SImg src={fillStar} />
-              <SImg src={fillStar} />
-            </FillStar>
-          </Rating>
-          <Score>{rating}</Score>
-        </RatingBlock>
-      </DetailBlock>
     </Block>
   );
 };

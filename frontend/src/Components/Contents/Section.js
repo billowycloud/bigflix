@@ -4,7 +4,7 @@ import btnLeft from '../../assets/btn_left.png';
 import btnRight from '../../assets/btn_right.png';
 
 const Block = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   position: relative;
 `;
 const Wrapper = styled.div`
@@ -37,9 +37,9 @@ const BtnImage = styled.img`
 `;
 const Button = styled.div`
   position: absolute;
-  top: 3.1rem;
-  height: 300px;
-  width: 50px;
+  top: 4.5rem;
+  height: 21rem;
+  width: 3.3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,11 +54,11 @@ const Button = styled.div`
           right: 0;
         `}
   &:hover {
-    background: rgba(26, 26, 26, 0.2);
+    background: rgba(26, 26, 26, 0.6);
     transition: background 0.5s;
 
     ${BtnImage} {
-      width: 30px;
+      width: 2rem;
       transition: width 0.3s;
     }
   }

@@ -5,13 +5,14 @@ import logo from '../assets/logo.png';
 import Search from './RightHeader/Search';
 import Account from './RightHeader/Account';
 import { useScroll } from '../lib/hooks/useScroll';
+
 const HeaderBlock = styled.header`
   color: white;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 4rem;
   display: flex;
   align-items: center;
   background: rgb(20, 20, 20);
@@ -32,7 +33,7 @@ const List = styled.ul`
 
 const Item = styled.li`
   width: 9rem;
-  height: 60px;
+  height: 4rem;
   text-align: center;
   color: rgba(255, 255, 255, 0.8);
   ${props =>
@@ -55,7 +56,7 @@ const Item = styled.li`
 `;
 
 const SLink = styled(Link)`
-  height: 60px;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,7 +75,7 @@ const RightBlock = styled.div`
 
 const RightItem = styled.div`
   width: 3rem;
-  height: 60px;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
