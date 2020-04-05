@@ -1,23 +1,21 @@
-import React from 'react';
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
   Redirect,
-  Switch
-} from 'react-router-dom';
+  Switch,
+} from "react-router-dom";
 
-import Home from '../Routes/Home';
-import TV from '../Routes/TV';
-import Movie from '../Routes/Movie';
-import Login from '../Routes/Login';
-import Register from '../Routes/Register';
-import PrivateRoute from './PrivateRoute';
-import Header from './Header';
+import Home from "../Routes/Home";
+import TV from "../Routes/TV";
+import Movie from "../Routes/Movie";
+import Login from "../Routes/Login";
+import Register from "../Routes/Register";
+import PrivateRoute from "./PrivateRoute";
 
 export default () => (
   <Router>
     <>
-      <Header />
       <Switch>
         <Route path="/" exact component={Login} />
         <Route path="/register" component={Register} />
