@@ -45,7 +45,7 @@ const Button = styled.div`
   align-items: center;
 
   cursor: pointer;
-  ${props =>
+  ${(props) =>
     props.isLeft
       ? css`
           left: 0;

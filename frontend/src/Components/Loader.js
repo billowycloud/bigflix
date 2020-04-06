@@ -1,5 +1,5 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
 
 const spin = keyframes`
  from{
@@ -11,7 +11,6 @@ const spin = keyframes`
 `;
 
 const Block = styled.div`
-  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;

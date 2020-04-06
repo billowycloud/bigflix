@@ -12,31 +12,30 @@ const HeaderBlock = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  height: 4rem;
-  display: flex;
-  align-items: center;
+  height: 5rem;
   background: rgb(20, 20, 20);
   z-index: 10;
 `;
 
-const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
-
 const List = styled.ul`
-  padding-left: 3rem;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-between;
 `;
 
 const Item = styled.li`
+  &:first-child {
+    margin-right: 1rem;
+  }
   width: 9rem;
-  height: 4rem;
-  text-align: center;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: rgba(255, 255, 255, 0.8);
-  ${props =>
+  transition: all 0.2s ease-in-out;
+  ${(props) =>
     props.current &&
     css`
       font-weight: bold;
@@ -45,18 +44,12 @@ const Item = styled.li`
     `}
 
   &:hover {
-    opacity: 0.5;
     font-size: 1.3rem;
-    color: #ff7675;
-    transition: all 0.2s ease-in-out;
-  }
-  & + & {
-    margin-left: 0.5rem;
+    color: rgba(255, 56, 56, 0.9);
   }
 `;
 
 const SLink = styled(Link)`
-  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,22 +59,31 @@ const Img = styled.img`
   background-position: center center;
   background-size: cover;
 `;
-const RightBlock = styled.div`
-  margin-right: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const RightItem = styled.div`
-  width: 3rem;
-  height: 4rem;
+  width: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  & + & {
-    margin-left: 1rem;
-  }
+`;
+
+const RightLongItem = styled(RightItem)`
+  margin-right: 1rem;
+  width: 15rem;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const LeftItemBlock = styled.div`
+  margin-left: 4rem;
+  display: flex;
+  flex-grow: 1;
+`;
+const RightItemBlock = styled.div`
+  margin-right: 4rem;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
 `;
 
 const Header = ({ location: { pathname } }) => {
@@ -91,11 +93,11 @@ const Header = ({ location: { pathname } }) => {
       style={{
         background:
           y < 50 &&
-          'linear-gradient(to bottom, rgb(12,12,12),rgba(12,12,12,0.4), transparent)'
+          'linear-gradient(to bottom, rgb(12,12,12),rgba(12,12,12,0.4), transparent)',
       }}
     >
-      <Wrapper>
-        <List>
+      <List>
+        <LeftItemBlock>
           <Item>
             <SLink to="/browse">
               <Img src={logo} alt="logo" />
@@ -110,16 +112,16 @@ const Header = ({ location: { pathname } }) => {
           <Item current={pathname === '/browse/movie'}>
             <SLink to="/browse/movie">영화</SLink>
           </Item>
-        </List>
-        <RightBlock>
-          <RightItem>
+        </LeftItemBlock>
+        <RightItemBlock>
+          <RightLongItem>
             <Search />
-          </RightItem>
+          </RightLongItem>
           <RightItem>
             <Account />
           </RightItem>
-        </RightBlock>
-      </Wrapper>
+        </RightItemBlock>
+      </List>
     </HeaderBlock>
   );
 };

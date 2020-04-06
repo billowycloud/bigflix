@@ -53,7 +53,8 @@ const Account = () => {
   const onLogout = () => {
     dispatch(logout());
   };
-
+  let test = user.email;
+  console.log(test);
   return (
     user && (
       <AccountBlock>

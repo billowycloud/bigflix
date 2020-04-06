@@ -14,12 +14,13 @@ mongoose
   .connect(MONGO_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex: true,
   })
   .then(() => {
     console.log('Connected to MongoDB');
   })
-  .catch(e => {
+  .catch((e) => {
     console.log(`DB Connection Error: ${e.message}`);
   });
 

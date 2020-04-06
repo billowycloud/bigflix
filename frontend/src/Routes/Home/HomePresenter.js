@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import Loader from "../../Components/Loader";
-import Section from "../../Components/Contents/Section";
-import Poster from "../../Components/Contents/Poster";
+import React from 'react';
+import styled from 'styled-components';
+import Loader from '../../Components/Loader';
+import Section from '../../Components/Contents/Section';
+import Poster from '../../Components/Contents/Poster';
 
 const Block = styled.div`
   margin-top: 1rem;
@@ -11,7 +11,7 @@ const Block = styled.div`
 `;
 
 const Header = styled.div`
-  background: url("https://image.tmdb.org/t/p/original/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg");
+  background: url('https://image.tmdb.org/t/p/original/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg');
   background-position: center center;
   background-size: cover;
   height: 45rem;
@@ -27,7 +27,7 @@ const HomePresenter = ({ result, loading, error }) => {
       <Block>
         {result && result.popularMovie && result.popularMovie.length > 0 && (
           <Section title="현재 인기 영화">
-            {result.popularMovie.map(content => (
+            {result.popularMovie.map((content) => (
               <Poster
                 key={content.id}
                 id={content.id}
@@ -42,7 +42,7 @@ const HomePresenter = ({ result, loading, error }) => {
         )}
         {result && result.popularTV && result.popularTV.length > 0 && (
           <Section title="현재 인기 드라마">
-            {result.popularTV.map(content => (
+            {result.popularTV.map((content) => (
               <Poster
                 key={content.id}
                 id={content.id}
@@ -57,7 +57,7 @@ const HomePresenter = ({ result, loading, error }) => {
         )}
         {result && result.airingTodayTV && result.airingTodayTV.length > 0 && (
           <Section title="오늘 방영된 TV채널">
-            {result.airingTodayTV.map(content => (
+            {result.airingTodayTV.map((content) => (
               <Poster
                 key={content.id}
                 id={content.id}
@@ -72,7 +72,7 @@ const HomePresenter = ({ result, loading, error }) => {
         )}
         {result && result.topRatedMovie && result.topRatedMovie.length > 0 && (
           <Section title="최고 평점 영화">
-            {result.topRatedMovie.map(content => (
+            {result.topRatedMovie.map((content) => (
               <Poster
                 key={content.id}
                 id={content.id}
@@ -87,7 +87,7 @@ const HomePresenter = ({ result, loading, error }) => {
         )}
         {result && result.topRatedTV && result.topRatedTV.length > 0 && (
           <Section title="최고 평점 TV채널">
-            {result.topRatedTV.map(content => (
+            {result.topRatedTV.map((content) => (
               <Poster
                 key={content.id}
                 id={content.id}

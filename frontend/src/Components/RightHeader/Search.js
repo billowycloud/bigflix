@@ -1,59 +1,61 @@
 import React, { useState } from 'react';
 import searchWhite from '../../assets/search_white.png';
-import styled, { keyframes, css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const SearchBlock = styled.div`
-  position: relative;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3rem;
-  height: 60px;
-`;
-
-const InputBox = styled.div`
-  border: ${props => (props.hide ? '1px solid white' : 'none')};
-  ${props =>
-    props.hide &&
-    css`
-      animation: ${ImageFade} 0.2s ease-in-out;
-    `}
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  right: 0;
-  cursor: pointer;
-`;
-
-const Form = styled.form`
-  display: ${props => (props.hide ? 'flex' : 'none')};
-  justify-content: center;
-  align-items: center;
-
-  input {
-    height: 2.8rem;
-    background: transparent;
-    color: white;
-    font-size: 1rem;
-    border: none;
-    outline: none;
-  }
 `;
 
 const SearchIcon = styled.img`
-  width: 40px;
   height: 40px;
+  cursor: pointer;
 `;
 
-const ImageFade = keyframes`
-from{
-  width: 0rem;
-}
-to{
-  width: 13rem;
-}
+const InputBox = styled.div`
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.6rem;
+  background: transparent;
+  transition: all 0.5s ease-in-out;
+  ${(props) =>
+    props.hide &&
+    css`
+      & {
+        border: 1px solid white;
+        background: rgba(12, 12, 12, 0.3);
+      }
+      ${Form} {
+        width: 13rem;
+      }
+      ${Input} {
+        width: 100%;
+      }
+    `}
+`;
+
+const Form = styled.form`
+  height: 100%;
+  width: 0;
+  transition: width 0.5s ease-in-out;
+`;
+
+const Input = styled.input`
+  width: 0;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+  transition: width 0.5s ease-in-out;
 `;
 
 const Search = () => {
@@ -64,8 +66,8 @@ const Search = () => {
     <SearchBlock>
       <InputBox hide={isOpen}>
         <SearchIcon src={searchWhite} onClick={toggle} />
-        <Form hide={isOpen}>
-          <input placeholder="제목, 장르"></input>
+        <Form>
+          <Input placeholder="제목, 배우"></Input>
         </Form>
       </InputBox>
     </SearchBlock>
