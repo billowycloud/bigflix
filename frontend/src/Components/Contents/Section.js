@@ -1,7 +1,7 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import btnLeft from '../../assets/btn_left.png';
-import btnRight from '../../assets/btn_right.png';
+import React from "react";
+import styled, { css } from "styled-components";
+import btnLeft from "../../assets/btn_left.png";
+import btnRight from "../../assets/btn_right.png";
 
 const Block = styled.div`
   margin-bottom: 1.5rem;
@@ -14,7 +14,7 @@ const Title = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
   position: absolute;
-  top: 1rem;
+  top: 0.2rem;
 `;
 
 const Contents = styled.div`

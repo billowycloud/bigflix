@@ -1,7 +1,7 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import backStar from '../../assets/backStar.png';
-import fillStar from '../../assets/fillStar.png';
+import React from "react";
+import styled, { keyframes } from "styled-components";
+import backStar from "../../assets/backStar.png";
+import fillStar from "../../assets/fillStar.png";
 
 const FadeIn = keyframes`
   from {
@@ -23,7 +23,7 @@ const DetailBlock = styled.div`
 `;
 
 const Img = styled.img`
-  height: 70%;
+  height: 80%;
   transition: width 0.5s, height 0.5s;
   -webkit-transition: width 0.5s, height 0.5s;
 `;
@@ -44,7 +44,7 @@ const Year = styled.p`
 
 const ImgWrapper = styled.div`
   position: relative;
-  height: 30rem;
+  height: 27rem;
   display: flex;
   align-items: center;
 `;
@@ -86,7 +86,7 @@ const BackStar = styled.div`
 
 const FillStar = styled.div`
   position: absolute;
-  width: ${props => props.rating * 10}%;
+  width: ${(props) => props.rating * 10}%;
   height: 25px;
   overflow: hidden;
   white-space: nowrap;
