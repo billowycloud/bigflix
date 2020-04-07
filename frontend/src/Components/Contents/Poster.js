@@ -1,7 +1,7 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
-import backStar from "../../assets/backStar.png";
-import fillStar from "../../assets/fillStar.png";
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
+import backStar from '../../assets/backStar.png';
+import fillStar from '../../assets/fillStar.png';
 
 const FadeIn = keyframes`
   from {
@@ -109,7 +109,7 @@ const Poster = ({ id, title, imgUrl, rating, year, isMovie }) => {
   return (
     <Block>
       <ImgWrapper>
-        <Img src={`https://image.tmdb.org/t/p/w500/${imgUrl}`} />
+        <Img src={`https://image.tmdb.org/t/p/w500/${imgUrl}`} alt={title} />
         <DetailBlock>
           <Title>{title}</Title>
           <Year>{year}</Year>

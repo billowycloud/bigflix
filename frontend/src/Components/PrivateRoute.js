@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { Route, withRouter } from "react-router-dom";
-import { useSelector } from "react-redux";
-import Header from "./Header";
+import React, { useEffect } from 'react';
+import { Route, withRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const PrivateRoute = ({ history, path, component, ...rest }) => {
   const { user } = useSelector(({ user }) => ({
@@ -10,18 +9,17 @@ const PrivateRoute = ({ history, path, component, ...rest }) => {
 
   useEffect(() => {
     if (!user) {
-      history.push("/");
+      history.push('/');
       try {
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(user));
       } catch (e) {
-        console.log(e + ": localStorage is not working");
+        console.log(e + ': localStorage is not working');
       }
     }
   }, [history, user]);
 
   return (
     <>
-      <Header />
       <Route path={path} component={component} {...rest}></Route>
     </>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import Header from './Header';
 
 const spin = keyframes`
  from{
@@ -28,6 +29,7 @@ const Loading = styled.span`
 const Loader = () => {
   return (
     <Block>
+      <Header />
       <Loading />
     </Block>
   );

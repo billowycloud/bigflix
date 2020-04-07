@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import Loader from '../../Components/Loader';
 import Section from '../../Components/Contents/Section';
 import Poster from '../../Components/Contents/Poster';
-
+import Header from '../../Components/Header';
 const Block = styled.div`
   margin-top: 1rem;
   padding-left: 4%;
   padding-right: 4%;
 `;
 
-const Header = styled.div`
+const HomeHeader = styled.div`
   background: url('https://image.tmdb.org/t/p/original/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg');
   background-position: center center;
   background-size: cover;
@@ -24,6 +24,7 @@ const HomePresenter = ({ result, loading, error }) => {
   ) : (
     <>
       <Header />
+      <HomeHeader />
       <Block>
         {result && result.popularMovie && result.popularMovie.length > 0 && (
           <Section title="현재 인기 영화">

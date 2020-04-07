@@ -1,7 +1,7 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import btnLeft from "../../assets/btn_left.png";
-import btnRight from "../../assets/btn_right.png";
+import React from 'react';
+import styled, { css } from 'styled-components';
+import btnLeft from '../../assets/btn_left.png';
+import btnRight from '../../assets/btn_right.png';
 
 const Block = styled.div`
   margin-bottom: 1.5rem;
@@ -37,8 +37,8 @@ const BtnImage = styled.img`
 `;
 const Button = styled.div`
   position: absolute;
-  top: 4.5rem;
-  height: 21rem;
+  top: 2.7rem;
+  height: 21.6rem;
   width: 3.3rem;
   display: flex;
   justify-content: center;
