@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import searchWhite from '../../assets/search_white.png';
-import styled, { css } from 'styled-components';
+import React, { useState } from "react";
+import searchWhite from "../../assets/search_white.png";
+import styled, { css } from "styled-components";
+import { withRouter } from "react-router-dom";
 
 const SearchBlock = styled.div`
   height: 100%;
@@ -58,20 +59,32 @@ const Input = styled.input`
   transition: width 0.5s ease-in-out;
 `;
 
-const Search = () => {
+const Search = ({ history }) => {
+  const [value, setValue] = useState(
+    localStorage.getItem("myValueInLocalStorage") || ""
+  );
   const [isOpen, setIsOpen] = useState(false); //Search탭 오픈 유무
   const toggle = () => setIsOpen(!isOpen);
+
+  const handleURL = (event) => {
+    setValue(event.target.value);
+    history.push(`/search/${event.target.value}`);
+  };
 
   return (
     <SearchBlock>
       <InputBox hide={isOpen}>
         <SearchIcon src={searchWhite} onClick={toggle} />
         <Form>
-          <Input placeholder="제목, 배우"></Input>
+          <Input
+            placeholder="제목, 배우"
+            value={value}
+            onChange={handleURL}
+          ></Input>
         </Form>
       </InputBox>
     </SearchBlock>
   );
 };
 
-export default Search;
+export default withRouter(Search);

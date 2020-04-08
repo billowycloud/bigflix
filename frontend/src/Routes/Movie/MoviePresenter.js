@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../../Components/Header";
 import GenreHeader from "../../Components/GenreHeader";
 import { useScroll } from "../../lib/hooks/useScroll";
 
@@ -16,7 +15,6 @@ const MoviePresenter = () => {
   const { y } = useScroll();
   return (
     <Block>
-      <Header scrollY={y} />
       <GenreHeader scrollY={y} path="/browse/movie" />
       <Test>MOVIE 테스트</Test>
     </Block>
