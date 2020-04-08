@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import styled, { css } from 'styled-components';
-import logo from '../assets/logo.png';
-import Search from './RightHeader/Search';
-import Account from './RightHeader/Account';
-import { useScroll } from '../lib/hooks/useScroll';
+import React from "react";
+import { Link, withRouter } from "react-router-dom";
+import styled, { css } from "styled-components";
+import logo from "../assets/logo.png";
+import Search from "./RightHeader/Search";
+import Account from "./RightHeader/Account";
+import { useScroll } from "../lib/hooks/useScroll";
 
 const HeaderBlock = styled.header`
   color: white;
@@ -15,6 +15,7 @@ const HeaderBlock = styled.header`
   height: 5rem;
   background: rgb(20, 20, 20);
   z-index: 10;
+  display: ${(props) => props.current && props.scrollY !== 0 && "none"};
 `;
 
 const List = styled.ul`
@@ -86,14 +87,17 @@ const RightItemBlock = styled.div`
   flex-grow: 1;
 `;
 
-const Header = ({ location: { pathname } }) => {
+const Header = ({ location: { pathname }, scrollY }) => {
   const { y } = useScroll();
   return (
+    /* 현재 페이지가 tv이거나 movie면 헤드 스크롤에 따라 감추기 */
     <HeaderBlock
+      scrollY={scrollY}
+      current={pathname === "/browse/tv" || pathname === "/browse/movie"}
       style={{
         background:
           y < 50 &&
-          'linear-gradient(to bottom, rgb(12,12,12),rgba(12,12,12,0.4), transparent)',
+          "linear-gradient(to bottom, rgb(12,12,12),rgba(12,12,12,0.4), transparent)",
       }}
     >
       <List>
@@ -103,13 +107,13 @@ const Header = ({ location: { pathname } }) => {
               <Img src={logo} alt="logo" />
             </SLink>
           </Item>
-          <Item current={pathname === '/browse'}>
+          <Item current={pathname === "/browse"}>
             <SLink to="/browse">홈</SLink>
           </Item>
-          <Item current={pathname === '/browse/tv'}>
+          <Item current={pathname === "/browse/tv"}>
             <SLink to="/browse/tv">TV 프로그램</SLink>
           </Item>
-          <Item current={pathname === '/browse/movie'}>
+          <Item current={pathname === "/browse/movie"}>
             <SLink to="/browse/movie">영화</SLink>
           </Item>
         </LeftItemBlock>
