@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../../Components/Header';
+import GenreHeader from '../../Components/GenreHeader';
+import { useScroll } from '../../lib/hooks/useScroll';
 
 const Block = styled.div`
   margin-top: 5rem;
+  height: 100vh;
 `;
 
 const Test = styled.div`
@@ -12,10 +15,12 @@ const Test = styled.div`
 `;
 
 const TVPresenter = () => {
+  const { y } = useScroll();
   return (
     <Block>
-      <Header />
-      <Test>TV화면 테스트</Test>
+      <Header scrollY={y} />
+      <GenreHeader scrollY={y} path="/browse/tv" />
+      <Test>{y}</Test>
     </Block>
   );
 };
