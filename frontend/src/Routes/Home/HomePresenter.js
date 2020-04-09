@@ -33,7 +33,9 @@ const HomePresenter = ({ result, loading, error }) => {
                 title={content.title}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={content.release_date.substring(0, 4)}
+                year={
+                  content.release_date && content.release_date.substring(0, 4)
+                }
                 isMovie={true}
               />
             ))}
@@ -48,7 +50,10 @@ const HomePresenter = ({ result, loading, error }) => {
                 title={content.name}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={content.first_air_date.substring(0, 4)}
+                year={
+                  content.first_air_date &&
+                  content.first_air_date.substring(0, 4)
+                }
                 isMovie={false}
               />
             ))}
@@ -63,7 +68,10 @@ const HomePresenter = ({ result, loading, error }) => {
                 title={content.name}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={content.first_air_date.substring(0, 4)}
+                year={
+                  content.first_air_date &&
+                  content.first_air_date.substring(0, 4)
+                }
                 isMovie={false}
               />
             ))}
@@ -78,7 +86,9 @@ const HomePresenter = ({ result, loading, error }) => {
                 title={content.title}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={content.release_date.substring(0, 4)}
+                year={
+                  content.release_date && content.release_date.substring(0, 4)
+                }
                 isMovie={true}
               />
             ))}
@@ -93,7 +103,10 @@ const HomePresenter = ({ result, loading, error }) => {
                 title={content.name}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={content.first_air_date.substring(0, 4)}
+                year={
+                  content.first_air_date &&
+                  content.first_air_date.substring(0, 4)
+                }
                 isMovie={false}
               />
             ))}

@@ -1,7 +1,7 @@
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import backStar from '../../assets/backStar.png';
-import fillStar from '../../assets/fillStar.png';
+import React from "react";
+import styled, { keyframes } from "styled-components";
+import backStar from "../../assets/backStar.png";
+import fillStar from "../../assets/fillStar.png";
 
 const FadeIn = keyframes`
   from {
@@ -105,7 +105,7 @@ const Score = styled.span`
   font-size: 1.2rem;
 `;
 
-const Poster = ({ id, title, imgUrl, rating, year, isMovie }) => {
+const Poster = ({ id, title, imgUrl, rating, year }) => {
   return (
     <Block>
       <ImgWrapper>

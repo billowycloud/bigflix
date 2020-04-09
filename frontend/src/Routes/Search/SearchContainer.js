@@ -4,8 +4,7 @@ import { multiApi } from "../../lib/api/home";
 import { withRouter } from "react-router-dom";
 
 const SearchContainer = ({ location: { pathname } }) => {
-  let splitedSearchText = pathname.split("/")[2];
-
+  let splitedText = pathname.split("/")[2];
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,11 +12,11 @@ const SearchContainer = ({ location: { pathname } }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (splitedSearchText.length === 0) return;
+        if (splitedText.length === 0) return;
         setLoading(true);
         const {
           data: { results: multiResults },
-        } = await multiApi.search(splitedSearchText);
+        } = await multiApi.search(splitedText);
 
         setResults({
           multiResults,
@@ -29,9 +28,16 @@ const SearchContainer = ({ location: { pathname } }) => {
       }
     };
     fetchData();
-  }, [splitedSearchText]);
+  }, [splitedText]);
 
-  return <SearchPresenter results={results} loading={loading} error={error} />;
+  return (
+    <SearchPresenter
+      results={results}
+      loading={loading}
+      error={error}
+      splitedText={splitedText}
+    />
+  );
 };
 
 export default withRouter(SearchContainer);

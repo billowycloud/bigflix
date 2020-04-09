@@ -39,7 +39,7 @@ const InputBox = styled.div`
     `}
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   height: 100%;
   width: 0;
   transition: width 0.5s ease-in-out;
@@ -69,6 +69,7 @@ const Search = ({ history }) => {
   const handleURL = (event) => {
     setValue(event.target.value);
     history.push(`/search/${event.target.value}`);
+    if (event.target.value === "") history.push(`/browse`);
   };
 
   return (

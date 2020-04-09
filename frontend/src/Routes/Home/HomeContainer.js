@@ -11,19 +11,19 @@ const HomeContainer = () => {
     const fetchData = async () => {
       try {
         const {
-          data: { results: popularMovie }
+          data: { results: popularMovie },
         } = await movieApi.popularMovie();
         const {
-          data: { results: popularTV }
+          data: { results: popularTV },
         } = await tvApi.popularTV();
         const {
-          data: { results: topRatedMovie }
+          data: { results: topRatedMovie },
         } = await movieApi.topRatedMovie();
         const {
-          data: { results: topRatedTV }
+          data: { results: topRatedTV },
         } = await tvApi.topRatedTV();
         const {
-          data: { results: airingTodayTV }
+          data: { results: airingTodayTV },
         } = await tvApi.airingTodayTV();
 
         setResult({
@@ -31,7 +31,7 @@ const HomeContainer = () => {
           popularTV,
           topRatedMovie,
           topRatedTV,
-          airingTodayTV
+          airingTodayTV,
         });
       } catch (e) {
         setError(e + "영화 정보를 찾을 수 없습니다.");

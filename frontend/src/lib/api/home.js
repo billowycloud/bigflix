@@ -30,7 +30,7 @@ export const multiApi = {
     Kor.get("search/multi", {
       params: {
         /* @,!,space를 입력했을때를 대비해 URL에서 인코딩 */
-        query: encodeURIComponent(term),
+        query: term,
       },
     }),
 };
