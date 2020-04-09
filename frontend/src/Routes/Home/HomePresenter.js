@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import Loader from "../../Components/Loader";
-import Section from "../../Components/Contents/Section";
-import Poster from "../../Components/Contents/Poster";
+import React from 'react';
+import styled from 'styled-components';
+import Loader from '../../Components/Loader';
+import Section from '../../Components/Contents/Section';
+import Poster from '../../Components/Contents/Poster';
 const Block = styled.div`
   margin-top: 1rem;
   padding-left: 4%;
@@ -10,7 +10,7 @@ const Block = styled.div`
 `;
 
 const HomeHeader = styled.div`
-  background: url("https://image.tmdb.org/t/p/original/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg");
+  background: url('https://image.tmdb.org/t/p/original/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg');
   background-position: center center;
   background-size: cover;
   height: 45rem;

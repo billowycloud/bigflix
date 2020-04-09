@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import SearchPresenter from "./SearchPresenter";
-import { multiApi } from "../../lib/api/home";
-import { withRouter } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import SearchPresenter from './SearchPresenter';
+import { multiApi } from '../../lib/api/home';
+import { withRouter } from 'react-router-dom';
 
 const SearchContainer = ({ location: { pathname } }) => {
-  let splitedText = pathname.split("/")[2];
+  let splitedText = pathname.split('/')[2];
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

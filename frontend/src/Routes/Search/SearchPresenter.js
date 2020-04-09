@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import Loader from "../../Components/Loader";
-import Poster from "../../Components/Contents/Poster";
-import Section from "../../Components/Contents/Section";
+import React from 'react';
+import styled from 'styled-components';
+import Loader from '../../Components/Loader';
+import Poster from '../../Components/Contents/Poster';
+import GridSection from '../../Components/Contents/GridSection';
 const Block = styled.div`
   margin-top: 5rem;
 `;
@@ -13,67 +13,71 @@ const SearchPresenter = ({ results, loading, error, splitedText }) => {
   return loading ? (
     <Loader />
   ) : (
-    <Block>
-      {results && results.multiResults && results.multiResults.length > 0 && (
-        <Section>
-          {results.multiResults.map((content) =>
-            content.media_type === "person" ? (
-              content.known_for.map((content) =>
-                content.media_type === "movie" ? (
-                  <Poster
-                    key={content.id}
-                    id={content.id}
-                    title={content.title}
-                    imgUrl={content.poster_path}
-                    rating={content.vote_average}
-                    year={
-                      content.release_date &&
-                      content.release_date.substring(0, 4)
-                    }
-                  />
-                ) : (
-                  <Poster
-                    key={content.id}
-                    id={content.id}
-                    title={content.name}
-                    imgUrl={content.poster_path}
-                    rating={content.vote_average}
-                    year={
-                      content.first_air_date &&
-                      content.first_air_date.substring(0, 4)
-                    }
-                  />
+    <>
+      <Block>
+        {results && results.multiResults && results.multiResults.length > 0 && (
+          <GridSection>
+            {results.multiResults.map((content) =>
+              content.media_type === 'person' ? (
+                content.known_for.map((content) =>
+                  content.media_type === 'movie' ? (
+                    <Poster
+                      key={content.id}
+                      id={content.id}
+                      title={content.title}
+                      imgUrl={content.poster_path}
+                      rating={content.vote_average}
+                      year={
+                        content.release_date &&
+                        content.release_date.substring(0, 4)
+                      }
+                    />
+                  ) : (
+                    <Poster
+                      key={content.id}
+                      id={content.id}
+                      title={content.name}
+                      imgUrl={content.poster_path}
+                      rating={content.vote_average}
+                      year={
+                        content.first_air_date &&
+                        content.first_air_date.substring(0, 4)
+                      }
+                    />
+                  )
                 )
+              ) : content.media_type === 'movie' ? (
+                <Poster
+                  key={content.id}
+                  id={content.id}
+                  title={content.title}
+                  imgUrl={content.poster_path}
+                  rating={content.vote_average}
+                  year={
+                    content.release_date && content.release_date.substring(0, 4)
+                  }
+                />
+              ) : (
+                <Poster
+                  key={content.id}
+                  id={content.id}
+                  title={content.name}
+                  imgUrl={content.poster_path}
+                  rating={content.vote_average}
+                  year={
+                    content.first_air_date &&
+                    content.first_air_date.substring(0, 4)
+                  }
+                />
               )
-            ) : content.media_type === "movie" ? (
-              <Poster
-                key={content.id}
-                id={content.id}
-                title={content.title}
-                imgUrl={content.poster_path}
-                rating={content.vote_average}
-                year={
-                  content.release_date && content.release_date.substring(0, 4)
-                }
-              />
-            ) : (
-              <Poster
-                key={content.id}
-                id={content.id}
-                title={content.name}
-                imgUrl={content.poster_path}
-                rating={content.vote_average}
-                year={
-                  content.first_air_date &&
-                  content.first_air_date.substring(0, 4)
-                }
-              />
-            )
-          )}
-        </Section>
+            )}
+          </GridSection>
+        )}
+      </Block>
+      {results.multiResults && results.multiResults.length === 0 && (
+        <div>{splitedText}</div>
       )}
-      ;
-    </Block>
+    </>
   );
 };
 
