@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import searchWhite from "../../assets/search_white.png";
-import styled, { css } from "styled-components";
-import { withRouter } from "react-router-dom";
+import React, { useState } from 'react';
+import searchWhite from '../../assets/search_white.png';
+import styled, { css } from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const SearchBlock = styled.div`
   height: 100%;
@@ -59,29 +59,33 @@ const Input = styled.input`
   transition: width 0.5s ease-in-out;
 `;
 
-const Search = ({ history }) => {
-  const [value, setValue] = useState(
-    localStorage.getItem("myValueInLocalStorage") || ""
-  );
+const Search = ({ history, currentRoute, location }) => {
+  const [prevRoute, setPrevRoute] = useState(currentRoute);
   const [isOpen, setIsOpen] = useState(false); //Search탭 오픈 유무
-  const toggle = () => setIsOpen(!isOpen);
 
   const handleURL = (event) => {
-    setValue(event.target.value);
-    history.push(`/search/${event.target.value}`);
-    if (event.target.value === "") history.push(`/browse`);
+    const { value } = event.target;
+    if (Number(value.length) === 1) {
+      if (!currentRoute.includes('search')) setPrevRoute(currentRoute);
+      history.push(`/search/${value}`);
+    } else if (Number(value.length) === 0) {
+      history.push(prevRoute);
+    } else if (Number(value.length) > 1) {
+      history.push(`/search/${value}`);
+    }
   };
 
   return (
     <SearchBlock>
       <InputBox hide={isOpen}>
-        <SearchIcon src={searchWhite} onClick={toggle} />
+        <SearchIcon
+          src={searchWhite}
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        />
         <Form>
-          <Input
-            placeholder="제목, 배우"
-            value={value}
-            onChange={handleURL}
-          ></Input>
+          <Input placeholder="제목, 배우" onKeyUp={handleURL}></Input>
         </Form>
       </InputBox>
     </SearchBlock>
