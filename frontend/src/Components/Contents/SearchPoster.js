@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { Rating } from "./Rating";
 
 const FadeIn = keyframes`
@@ -22,16 +22,7 @@ const DetailBlock = styled.div`
 `;
 
 const Img = styled.img`
-  ${(props) =>
-    props.isGrid
-      ? css`
-          width: 15.3rem;
-          height: 23rem;
-        `
-      : css`
-          height: 80%;
-        `}
-  cursor: pointer;
+  height: 100%;
   transition: width 0.5s, height 0.5s;
   -webkit-transition: width 0.5s, height 0.5s;
 `;
@@ -39,22 +30,21 @@ const Img = styled.img`
 const Title = styled.h3`
   width: 100%;
   font-weight: bold;
-  font-size: ${(props) => (props.isGrid ? "1rem" : "1.3rem")};
+  font-size: 1.3rem;
   margin-bottom: 0.8rem;
   white-space: normal;
   line-height: 1.4rem;
 `;
 
 const Year = styled.p`
-  font-size: ${(props) => (props.isGrid ? "0.9rem" : "1.2rem")};
+  font-size: 1.2rem;
   margin-bottom: 0.3rem;
 `;
 
 const ImgWrapper = styled.div`
   position: relative;
-  height: ${(props) => (props.isGrid ? "23rem" : "27rem")};
+  height: 27rem;
   display: flex;
-  justify-content: center;
   align-items: center;
 `;
 
@@ -66,11 +56,6 @@ const Block = styled.div`
     }
     ${Img} {
       opacity: 0.3;
-      ${(props) =>
-        !props.isGrid &&
-        css`
-          height: 100%;
-        `}
     }
   }
   &:not(:last-child) {
@@ -78,10 +63,10 @@ const Block = styled.div`
   }
 `;
 
-const Poster = ({ id, title, imgUrl, rating, year, isGrid }) => {
+const SearchPoster = ({ id, title, imgUrl, rating, year }) => {
   return (
-    <Block isGrid={isGrid}>
-      <ImgWrapper isGrid={isGrid}>
+    <Block>
+      <ImgWrapper>
         <Img
           src={
             imgUrl
@@ -89,11 +74,10 @@ const Poster = ({ id, title, imgUrl, rating, year, isGrid }) => {
               : require("../../assets/noPoster.png")
           }
           alt={title}
-          isGrid={isGrid}
         />
-        <DetailBlock isGrid={isGrid}>
-          <Title isGrid={isGrid}>{title}</Title>
-          <Year isGrid={isGrid}>{year}</Year>
+        <DetailBlock>
+          <Title>{title}</Title>
+          <Year>{year}</Year>
           <Rating rating={rating} />
         </DetailBlock>
       </ImgWrapper>
@@ -101,4 +85,4 @@ const Poster = ({ id, title, imgUrl, rating, year, isGrid }) => {
   );
 };
 
-export default Poster;
+export default SearchPoster;

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import searchWhite from '../../assets/search_white.png';
-import styled, { css } from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import React, { useState } from "react";
+import searchWhite from "../../assets/search_white.png";
+import styled, { css } from "styled-components";
+import { withRouter } from "react-router-dom";
 
 const SearchBlock = styled.div`
   height: 100%;
@@ -66,7 +66,7 @@ const Search = ({ history, currentRoute, location }) => {
   const handleURL = (event) => {
     const { value } = event.target;
     if (Number(value.length) === 1) {
-      if (!currentRoute.includes('search')) setPrevRoute(currentRoute);
+      if (!currentRoute.includes("search")) setPrevRoute(currentRoute);
       history.push(`/search/${value}`);
     } else if (Number(value.length) === 0) {
       history.push(prevRoute);

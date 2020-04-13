@@ -1,7 +1,7 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import btnLeft from '../../assets/btn_left.png';
-import btnRight from '../../assets/btn_right.png';
+import React from "react";
+import styled, { css } from "styled-components";
+import btnLeft from "../../assets/btn_left.png";
+import btnRight from "../../assets/btn_right.png";
 
 const Block = styled.div`
   margin-bottom: 1.5rem;
