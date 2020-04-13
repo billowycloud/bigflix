@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import searchWhite from "../../assets/search_white.png";
-import styled, { css } from "styled-components";
-import { withRouter } from "react-router-dom";
+import React, { useState, useRef } from 'react';
+import searchWhite from '../../assets/search_white.png';
+import styled, { css } from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const SearchBlock = styled.div`
   height: 100%;
@@ -60,13 +60,14 @@ const Input = styled.input`
 `;
 
 const Search = ({ history, currentRoute, location }) => {
+  const inputRef = useRef(null);
+
   const [prevRoute, setPrevRoute] = useState(currentRoute);
   const [isOpen, setIsOpen] = useState(false); //Search탭 오픈 유무
-
   const handleURL = (event) => {
     const { value } = event.target;
     if (Number(value.length) === 1) {
-      if (!currentRoute.includes("search")) setPrevRoute(currentRoute);
+      if (!currentRoute.includes('search')) setPrevRoute(currentRoute);
       history.push(`/search/${value}`);
     } else if (Number(value.length) === 0) {
       history.push(prevRoute);
@@ -81,11 +82,19 @@ const Search = ({ history, currentRoute, location }) => {
         <SearchIcon
           src={searchWhite}
           onClick={() => {
+            if (!isOpen) inputRef.current.focus();
             setIsOpen(!isOpen);
           }}
         />
         <Form>
-          <Input placeholder="제목, 배우" onKeyUp={handleURL}></Input>
+          <Input
+            ref={inputRef}
+            placeholder="제목, 배우"
+            onKeyUp={handleURL}
+            onBlur={(e) => {
+              if (e.target.value === '') setIsOpen(!isOpen);
+            }}
+          ></Input>
         </Form>
       </InputBox>
     </SearchBlock>
