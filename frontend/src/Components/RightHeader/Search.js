@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
-import searchWhite from '../../assets/search_white.png';
-import styled, { css } from 'styled-components';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useRef, useContext } from "react";
+import searchWhite from "../../assets/search_white.png";
+import styled, { css } from "styled-components";
+import { withRouter } from "react-router-dom";
+import SearchContext from "../../contexts/search";
 
 const SearchBlock = styled.div`
   height: 100%;
@@ -60,19 +61,20 @@ const Input = styled.input`
 `;
 
 const Search = ({ history, currentRoute, location }) => {
+  const { state, actions } = useContext(SearchContext);
   const inputRef = useRef(null);
-
-  const [prevRoute, setPrevRoute] = useState(currentRoute);
   const [isOpen, setIsOpen] = useState(false); //Search탭 오픈 유무
+
   const handleURL = (event) => {
     const { value } = event.target;
+    actions.setSearchValue(value);
     if (Number(value.length) === 1) {
-      if (!currentRoute.includes('search')) setPrevRoute(currentRoute);
-      history.push(`/search/${value}`);
+      if (!currentRoute.includes("search")) actions.setPrevRoute(currentRoute);
+      history.push(`/search`);
     } else if (Number(value.length) === 0) {
-      history.push(prevRoute);
+      history.push(state.prevRoute);
     } else if (Number(value.length) > 1) {
-      history.push(`/search/${value}`);
+      history.push(`/search`);
     }
   };
 
@@ -82,19 +84,25 @@ const Search = ({ history, currentRoute, location }) => {
         <SearchIcon
           src={searchWhite}
           onClick={() => {
-            if (!isOpen) inputRef.current.focus();
-            setIsOpen(!isOpen);
+            if (!isOpen) {
+              setIsOpen(true);
+              inputRef.current.focus();
+              actions.setPrevRoute(currentRoute); //포커싱 될 때 이전페이지
+            }
           }}
         />
         <Form>
           <Input
             ref={inputRef}
             placeholder="제목, 배우"
-            onKeyUp={handleURL}
+            onChange={handleURL}
             onBlur={(e) => {
-              if (e.target.value === '') setIsOpen(!isOpen);
+              if (e.target.value === "") {
+                setIsOpen(false);
+                history.push(state.prevRoute);
+              }
             }}
-          ></Input>
+          />
         </Form>
       </InputBox>
     </SearchBlock>

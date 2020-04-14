@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import SearchPresenter from './SearchPresenter';
-import { multiApi } from '../../lib/api/home';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from "react";
+import SearchPresenter from "./SearchPresenter";
+import { multiApi } from "../../lib/api/home";
+import SearchContext from "../../contexts/search";
 
-const SearchContainer = ({ location: { pathname } }) => {
-  let splitedText = pathname.split('/')[2];
+const SearchContainer = ({ history }) => {
+  const { state } = useContext(SearchContext);
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,11 +12,14 @@ const SearchContainer = ({ location: { pathname } }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (splitedText.length === 0) return;
+        if (state.searchValue.length === 0) {
+          history.push(state.prevRoute); //Serach페이지에서 새로고침할 경우 홈 이동
+          return;
+        }
         setLoading(true);
         const {
           data: { results: multiResults },
-        } = await multiApi.search(splitedText);
+        } = await multiApi.search(state.searchValue);
 
         setResults({
           multiResults,
@@ -28,16 +31,16 @@ const SearchContainer = ({ location: { pathname } }) => {
       }
     };
     fetchData();
-  }, [splitedText]);
+  }, [state.searchValue, state.prevRoute, history]);
 
   return (
     <SearchPresenter
       results={results}
       loading={loading}
       error={error}
-      splitedText={splitedText}
+      searchValue={state.searchValue}
     />
   );
 };
 
-export default withRouter(SearchContainer);
+export default SearchContainer;

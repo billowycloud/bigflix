@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 
 /* /serach/multi API를 요청했을 경우 조건에 따른 포스터 출력
 media_type이 배우일 경우 배우가 출연했던 영화와 TV를 출력 */
-const SearchPresenter = ({ results, loading, error, splitedText }) => {
+const SearchPresenter = ({ results, loading, error, searchValue }) => {
   return loading ? (
     <Loader />
   ) : (
@@ -90,7 +90,7 @@ const SearchPresenter = ({ results, loading, error, splitedText }) => {
         )}
       </Block>
       {results.multiResults && results.multiResults.length === 0 && (
-        <div>{splitedText}</div>
+        <div>{searchValue}</div>
       )}
     </>
   );
