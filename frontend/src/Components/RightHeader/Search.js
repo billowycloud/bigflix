@@ -25,14 +25,14 @@ const InputBox = styled.div`
   background: transparent;
   transition: all 0.5s ease-in-out;
   ${(props) =>
-    props.hide &&
+    props.isOpen &&
     css`
       & {
         border: 1px solid white;
         background: rgba(12, 12, 12, 0.3);
       }
       ${Form} {
-        width: 13rem;
+        width: 10rem;
       }
       ${Input} {
         width: 100%;
@@ -60,7 +60,55 @@ const Input = styled.input`
   transition: width 0.5s ease-in-out;
 `;
 
-const Search = ({ history, currentRoute, location }) => {
+const Delete = styled.div`
+  ${(props) =>
+    props.isOpen
+      ? css`
+          width: 30px;
+          height: 30px;
+          &:before,
+          &:after {
+            width: 26px;
+            height: 4px;
+          }
+        `
+      : css`
+          width: 0;
+          heigth: 0;
+          &:before,
+          &:after {
+            width: 0px;
+            height: 0px;
+          }
+        `}
+
+  position: relative;
+  border-radius: 6px;
+  cursor: pointer;
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    transition: width 1s ease-in-out;
+    background-color: white;
+    border-radius: 2px;
+    top: 14px;
+  }
+
+  &:before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    left: 2px;
+  }
+  &:after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    right: 2px;
+  }
+`;
+const Search = ({ history, currentRoute }) => {
   const { state, actions } = useContext(SearchContext);
   const inputRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false); //Search탭 오픈 유무
@@ -80,7 +128,7 @@ const Search = ({ history, currentRoute, location }) => {
 
   return (
     <SearchBlock>
-      <InputBox hide={isOpen}>
+      <InputBox isOpen={isOpen}>
         <SearchIcon
           src={searchWhite}
           onClick={() => {
@@ -104,6 +152,16 @@ const Search = ({ history, currentRoute, location }) => {
             }}
           />
         </Form>
+        <Delete
+          isOpen={isOpen}
+          isValue={state.searchValue}
+          onClick={(e) => {
+            setIsOpen(false);
+            inputRef.current.value = "";
+            actions.setSearchValue("");
+            history.push(state.prevRoute);
+          }}
+        />
       </InputBox>
     </SearchBlock>
   );

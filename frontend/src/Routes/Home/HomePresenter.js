@@ -22,7 +22,9 @@ const HomePresenter = ({ result, loading, error }) => {
     <Loader />
   ) : (
     <>
-      <HomeHeader />
+      {result && result.popularMovie && result.popularMovie.length > 0 && (
+        <HomeHeader />
+      )}
       <Block>
         {result && result.popularMovie && result.popularMovie.length > 0 && (
           <Section title="현재 인기 영화">
