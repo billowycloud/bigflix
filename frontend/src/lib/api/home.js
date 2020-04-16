@@ -23,13 +23,13 @@ export const tvApi = {
         append_to_response: "videos",
       },
     }),
+  getGenre: () => Kor.get("genre/tv/list"),
 };
 
 export const multiApi = {
   search: (term) =>
     Kor.get(`search/multi?${term}`, {
       params: {
-        /* @,!,space를 입력했을때를 대비해 URL에서 인코딩 */
         query: term,
       },
     }),

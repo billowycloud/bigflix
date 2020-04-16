@@ -20,7 +20,6 @@ const SearchContainer = ({ history }) => {
         const {
           data: { results: multiResults },
         } = await multiApi.search(state.searchValue);
-
         setResults({
           multiResults,
         });
