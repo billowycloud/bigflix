@@ -5,7 +5,7 @@ import Section from "../../Components/Contents/Section";
 import Poster from "../../Components/Contents/Poster";
 
 const Block = styled.div`
-  margin-top: 1rem;
+  margin-top: 2rem;
 `;
 
 const HomeHeader = styled.div`

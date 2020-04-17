@@ -7,7 +7,7 @@ import Section from "../../Components/Contents/Section";
 import Poster from "../../Components/Contents/Poster";
 
 const Block = styled.div`
-  margin-top: 5rem;
+  margin-top: 2rem;
 `;
 
 const TVHeader = styled.div`
