@@ -9,7 +9,9 @@ export const movieApi = {
         append_to_response: "videos",
       },
     }),
-
+  movieSimilar: (id) => Kor.get(`movie/${id}/similar`),
+  movieTrendingDay: () => Kor.get("trending/movie/day"),
+  movieTrendingWeek: () => Kor.get("trending/movie/week"),
   getGenre: () => Kor.get("genre/movie/list"),
 };
 
@@ -23,6 +25,9 @@ export const tvApi = {
         append_to_response: "videos",
       },
     }),
+  tvSimilar: (id) => Kor.get(`tv/${id}/similar`),
+  tvTrendingDay: () => Kor.get("trending/tv/day"),
+  tvTrendingWeek: () => Kor.get("trending/tv/week"),
   getGenre: () => Kor.get("genre/tv/list"),
 };
 

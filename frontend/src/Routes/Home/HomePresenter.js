@@ -3,10 +3,9 @@ import styled from "styled-components";
 import Loader from "../../Components/Loader";
 import Section from "../../Components/Contents/Section";
 import Poster from "../../Components/Contents/Poster";
+
 const Block = styled.div`
   margin-top: 1rem;
-  padding-left: 4%;
-  padding-right: 4%;
 `;
 
 const HomeHeader = styled.div`

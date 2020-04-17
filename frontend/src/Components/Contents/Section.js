@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 `;
 const Title = styled.div`
   font-size: 1.5rem;
+  padding-left: 1rem;
   font-weight: bold;
   position: absolute;
   top: 0.2rem;
@@ -29,8 +30,7 @@ const HideScroll = styled.div`
   right: 0;
   bottom: 0;
   height: 20px;
-  background: rgba(20, 20, 20, 1);
-  z-index: 100;
+  background: rgb(20, 20, 20);
 `;
 const BtnImage = styled.img`
   width: 0px;

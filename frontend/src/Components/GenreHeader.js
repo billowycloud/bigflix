@@ -14,6 +14,7 @@ const fadeIn = keyframes`
 
 const Block = styled.div`
   position: fixed;
+  z-index: 10;
   ${(props) =>
     props.scrollY === 0
       ? css`
@@ -74,7 +75,7 @@ const Button = styled.div`
   ${(props) =>
     props.isOpen &&
     css`
-      background: transparent;
+      background: rgba(0, 0, 0, 0.2);
     `}
 `;
 const Text = styled.div``;
