@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
 import Poster from "../../Components/Contents/Poster";
+import Message from "../../Components/Message";
 
 const Block = styled.div`
   margin-top: 5rem;
@@ -90,7 +91,7 @@ const SearchPresenter = ({ results, loading, error, searchValue }) => {
         )}
       </Block>
       {results.multiResults && results.multiResults.length === 0 && (
-        <div>{searchValue}</div>
+        <Message searchValue={searchValue} />
       )}
     </>
   );

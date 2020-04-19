@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../modules/user";
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import profile from "../../assets/profile.png";
 import downArrow from "../../assets/down_arrow_white.png";
 
@@ -12,10 +12,6 @@ const fadeIn = keyframes`
  to{
   opacity: 1;
  }
-`;
-
-const AccountBlock = styled.div`
-  position: relative;
 `;
 
 const DropdownButton = styled.div`
@@ -38,12 +34,6 @@ const Dropdown = styled.div`
   width: 10rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  ${(props) =>
-    props.hide &&
-    css`
-      display: flex;
-      animation: ${fadeIn} 0.5s ease-in-out;
-    `}
 `;
 
 const ProfileImg = styled.img`
@@ -80,9 +70,17 @@ const List = styled.div`
   }
 `;
 
+const AccountBlock = styled.div`
+  position: relative;
+  &:hover {
+    ${Dropdown} {
+      display: flex;
+      animation: ${fadeIn} 0.5s ease-in-out;
+    }
+  }
+`;
+
 const Account = () => {
-  const [isOpen, setIsOpen] = useState(false); //Account탭 오픈 유무
-  const toggle = () => setIsOpen(!isOpen);
   const { user } = useSelector(({ user }) => ({ user: user.user }));
   const dispatch = useDispatch();
 
@@ -92,7 +90,7 @@ const Account = () => {
 
   return (
     user && (
-      <AccountBlock onMouseOver={toggle} onMouseOut={toggle}>
+      <AccountBlock>
         <DropdownButton>
           <ProfileImg src={profile} alt="profile" />
           <img
@@ -101,7 +99,7 @@ const Account = () => {
             alt="downarrow"
           />
         </DropdownButton>
-        <Dropdown hide={isOpen}>
+        <Dropdown>
           <List>
             <div>{user.email}</div>
             <div>프로필 설정</div>

@@ -13,8 +13,9 @@ const fadeIn = keyframes`
 `;
 
 const Block = styled.div`
+  z-index: 9;
   position: fixed;
-  z-index: 10;
+
   ${(props) =>
     props.scrollY === 0
       ? css`
@@ -26,7 +27,6 @@ const Block = styled.div`
           top: 0;
           background: rgb(20, 20, 20);
         `}
-
   width: 100%;
   height: 4rem;
   display: flex;
@@ -77,6 +77,9 @@ const Button = styled.div`
     css`
       background: rgba(0, 0, 0, 0.2);
     `}
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
 `;
 const Text = styled.div``;
 const DownArrow = styled.div`

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef, useContext, useEffect } from "react";
 import searchWhite from "../../assets/search_white.png";
 import styled, { css } from "styled-components";
 import { withRouter } from "react-router-dom";
@@ -113,6 +113,17 @@ const Search = ({ history, currentRoute }) => {
   const inputRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false); //Search탭 오픈 유무
 
+  useEffect(() => {
+    /* Search탭이 열린채로 다른라우터 이동 시 닫기 */
+    if (
+      isOpen &&
+      inputRef.current.value.length > 0 &&
+      !currentRoute.includes("search")
+    ) {
+      inputRef.current.value = "";
+      setIsOpen(false);
+    }
+  }, [isOpen, currentRoute]);
   const handleURL = (event) => {
     const { value } = event.target;
     actions.setSearchValue(value);
@@ -155,7 +166,7 @@ const Search = ({ history, currentRoute }) => {
         <Delete
           isOpen={isOpen}
           isValue={state.searchValue}
-          onClick={(e) => {
+          onClick={() => {
             setIsOpen(false);
             inputRef.current.value = "";
             actions.setSearchValue("");
