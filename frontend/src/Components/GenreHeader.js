@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { movieApi, tvApi } from "../lib/api/home";
 
 const fadeIn = keyframes`
@@ -64,6 +64,9 @@ const Wrapper = styled.div`
 `;
 const GenreItem = styled.div`
   font-size: 1rem;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 const Button = styled.div`
   display: flex;
@@ -117,7 +120,7 @@ const useFetch = () => {
   return { result, error };
 };
 
-const GenreHeader = ({ location: { pathname }, scrollY }) => {
+const GenreHeader = ({ history, location: { pathname }, scrollY }) => {
   const { result } = useFetch();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -142,13 +145,17 @@ const GenreHeader = ({ location: { pathname }, scrollY }) => {
             result &&
             result.getGenreTV &&
             result.getGenreTV.map((content) => (
-              <GenreItem key={content.id}>{content.name}</GenreItem>
+              <GenreItem key={content.id}>
+                <Link to={`/browse/tv/${content.id}`}>{content.name}</Link>
+              </GenreItem>
             ))) ||
             (pathname.includes("/browse/movie") &&
               result &&
               result.getGenreMovie &&
               result.getGenreMovie.map((content) => (
-                <GenreItem key={content.id}>{content.name}</GenreItem>
+                <GenreItem key={content.id}>
+                  <Link to={`/browse/movie/${content.id}`}>{content.name}</Link>
+                </GenreItem>
               )))}
         </Wrapper>
       </GenreBox>

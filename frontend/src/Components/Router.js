@@ -22,8 +22,10 @@ export default () => (
         <Route path="/" exact component={Login} />
         <Route path="/register" component={Register} />
         <PrivateRoute path="/browse" exact component={Home} />
-        <PrivateRoute path="/browse/tv" component={TV} />
-        <PrivateRoute path="/browse/movie" component={Movie} />
+        <PrivateRoute path="/browse/tv" exact component={TV} />
+        <PrivateRoute path="/browse/movie" exact component={Movie} />
+        <PrivateRoute path="/browse/tv/:genre" component={TV} />
+        <PrivateRoute path="/browse/movie/:genre" component={Movie} />
         <PrivateRoute path="/search" component={Search} />
         <Redirect from="*" to="/" />
       </Switch>

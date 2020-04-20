@@ -5,6 +5,7 @@ import { useScroll } from "../../lib/hooks/useScroll";
 import Loader from "../../Components/Loader";
 import Section from "../../Components/Contents/Section";
 import Poster from "../../Components/Contents/Poster";
+import { withRouter } from "react-router-dom";
 
 const Block = styled.div`
   margin-top: 2rem;
@@ -18,56 +19,64 @@ const MovieHeader = styled.div`
   height: 45rem;
 `;
 
-const MoviePresenter = ({ result, loading, error }) => {
+const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
   const { y } = useScroll();
   return loading ? (
     <Loader />
   ) : (
     <>
       <GenreHeader scrollY={y} path="/browse/movie" />
-      <MovieHeader />
-      <Block>
-        {result &&
-          result.movieTrendingDay &&
-          result.movieTrendingDay.length > 0 && (
-            <Section title="오늘 하루 인기 영화">
-              {result.movieTrendingDay.map((content) => (
-                <Poster
-                  key={content.id}
-                  id={content.id}
-                  title={content.title}
-                  imgUrl={content.poster_path}
-                  rating={content.vote_average}
-                  year={
-                    content.release_date && content.release_date.substring(0, 4)
-                  }
-                  isGrid={false}
-                />
-              ))}
-            </Section>
-          )}
-        {result &&
-          result.movieTrendingWeek &&
-          result.movieTrendingWeek.length > 0 && (
-            <Section title="주간 인기 영화">
-              {result.movieTrendingWeek.map((content) => (
-                <Poster
-                  key={content.id}
-                  id={content.id}
-                  title={content.title}
-                  imgUrl={content.poster_path}
-                  rating={content.vote_average}
-                  year={
-                    content.release_date && content.release_date.substring(0, 4)
-                  }
-                  isGrid={false}
-                />
-              ))}
-            </Section>
-          )}
-      </Block>
+      {isNaN(pathname.split("/")[3]) ? (
+        <>
+          <MovieHeader />
+          <Block>
+            {result &&
+              result.movieTrendingDay &&
+              result.movieTrendingDay.length > 0 && (
+                <Section title="오늘 하루 인기 영화">
+                  {result.movieTrendingDay.map((content) => (
+                    <Poster
+                      key={content.id}
+                      id={content.id}
+                      title={content.title}
+                      imgUrl={content.poster_path}
+                      rating={content.vote_average}
+                      year={
+                        content.release_date &&
+                        content.release_date.substring(0, 4)
+                      }
+                      isGrid={false}
+                    />
+                  ))}
+                </Section>
+              )}
+            {result &&
+              result.movieTrendingWeek &&
+              result.movieTrendingWeek.length > 0 && (
+                <Section title="주간 인기 영화">
+                  {result.movieTrendingWeek.map((content) => (
+                    <Poster
+                      key={content.id}
+                      id={content.id}
+                      title={content.title}
+                      imgUrl={content.poster_path}
+                      rating={content.vote_average}
+                      year={
+                        content.release_date &&
+                        content.release_date.substring(0, 4)
+                      }
+                      isGrid={false}
+                    />
+                  ))}
+                </Section>
+              )}
+          </Block>
+        </>
+      ) : (
+        <Block>Test</Block>
+      )}
     </>
   );
 };
 
-export default MoviePresenter;
+export default withRouter(MoviePresenter);

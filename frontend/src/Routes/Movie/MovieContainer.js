@@ -19,8 +19,16 @@ const MovieContainer = () => {
         const {
           data: { results: movieTrendingWeek },
         } = await movieApi.movieTrendingWeek();
+        const {
+          data: { results: movieDiscover },
+        } = await movieApi.movieDiscover(28, 1);
 
-        setResult({ movieSimilar, movieTrendingDay, movieTrendingWeek });
+        setResult({
+          movieSimilar,
+          movieTrendingDay,
+          movieTrendingWeek,
+          movieDiscover,
+        });
       } catch (e) {
         setError(e);
       } finally {

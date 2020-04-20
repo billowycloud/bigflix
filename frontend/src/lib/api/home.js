@@ -13,6 +13,13 @@ export const movieApi = {
   movieTrendingDay: () => Kor.get("trending/movie/day"),
   movieTrendingWeek: () => Kor.get("trending/movie/week"),
   getGenre: () => Kor.get("genre/movie/list"),
+  movieDiscover: (genre, page) =>
+    Kor.get(`discover/movie`, {
+      params: {
+        with_genres: genre,
+        page: page,
+      },
+    }),
 };
 
 export const tvApi = {
@@ -29,6 +36,13 @@ export const tvApi = {
   tvTrendingDay: () => Kor.get("trending/tv/day"),
   tvTrendingWeek: () => Kor.get("trending/tv/week"),
   getGenre: () => Kor.get("genre/tv/list"),
+  tvDiscover: (genre, page) =>
+    Kor.get(`discover/tv`, {
+      params: {
+        with_genres: genre,
+        page: page,
+      },
+    }),
 };
 
 export const multiApi = {
