@@ -6,6 +6,7 @@ import Loader from "../../Components/Loader";
 import Section from "../../Components/Contents/Section";
 import Poster from "../../Components/Contents/Poster";
 import { withRouter } from "react-router-dom";
+import GridTemplate from "../../Components/GridTemplate";
 
 const Block = styled.div`
   margin-top: 2rem;
@@ -17,6 +18,10 @@ const MovieHeader = styled.div`
   background-position: center center;
   background-size: cover;
   height: 45rem;
+`;
+
+const Wrapper = styled.div`
+  margin-top: 10rem;
 `;
 
 const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
@@ -73,7 +78,26 @@ const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
           </Block>
         </>
       ) : (
-        <Block>Test</Block>
+        <Wrapper>
+          <GridTemplate>
+            {result &&
+              result.movieDiscover &&
+              result.movieDiscover.length > 0 &&
+              result.movieDiscover.map((content) => (
+                <Poster
+                  key={content.id}
+                  id={content.id}
+                  title={content.title}
+                  imgUrl={content.poster_path}
+                  rating={content.vote_average}
+                  year={
+                    content.release_date && content.release_date.substring(0, 4)
+                  }
+                  isGrid={true}
+                />
+              ))}
+          </GridTemplate>
+        </Wrapper>
       )}
     </>
   );

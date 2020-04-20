@@ -19,8 +19,11 @@ const TVContainer = () => {
         const {
           data: { results: tvTrendingWeek },
         } = await tvApi.tvTrendingWeek();
+        const {
+          data: { results: tvDiscover },
+        } = await tvApi.tvDiscover(10759, 1);
 
-        setResult({ tvSimilar, tvTrendingDay, tvTrendingWeek });
+        setResult({ tvSimilar, tvTrendingDay, tvTrendingWeek, tvDiscover });
       } catch (e) {
         setError(e);
       } finally {

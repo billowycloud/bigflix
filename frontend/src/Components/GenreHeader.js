@@ -39,6 +39,12 @@ const PageName = styled.h1`
   font-size: 2rem;
 `;
 
+const PageBack = styled.h1`
+  font-size: 1.3rem;
+  color: #7f7f7e;
+  cursor: pointer;
+`;
+
 const GenreBox = styled.div`
   margin-left: 2rem;
   position: relative;
@@ -85,6 +91,11 @@ const Button = styled.div`
   }
 `;
 const Text = styled.div``;
+
+const GenreText = styled.h1`
+  font-weight: bold;
+  font-size: 2rem;
+`;
 const DownArrow = styled.div`
   margin-left: 1rem;
   width: 0px;
@@ -123,41 +134,73 @@ const useFetch = () => {
 const GenreHeader = ({ history, location: { pathname }, scrollY }) => {
   const { result } = useFetch();
   const [isOpen, setIsOpen] = useState(false);
+  const [genre, setGenre] = useState(); // 장르 텍스트 설정
 
   return (
     <Block scrollY={scrollY}>
-      <PageName>
-        {(pathname.includes("/browse/tv") && "TV 프로그램") ||
-          (pathname.includes("/browse/movie") && "영화")}
-      </PageName>
-      <GenreBox>
-        <Button
-          isOpen={isOpen}
+      {isNaN(pathname.split("/")[3]) ? (
+        <PageName>
+          {(pathname.includes("/browse/tv") && "TV 프로그램") ||
+            (pathname.includes("/browse/movie") && "영화")}
+        </PageName>
+      ) : (
+        <PageBack
           onClick={() => {
-            setIsOpen(!isOpen);
+            history.goBack();
           }}
         >
-          <Text>장르</Text>
-          <DownArrow />
-        </Button>
-        <Wrapper isOpen={isOpen}>
-          {(pathname.includes("/browse/tv") &&
-            result &&
-            result.getGenreTV &&
-            result.getGenreTV.map((content) => (
-              <GenreItem key={content.id}>
-                <Link to={`/browse/tv/${content.id}`}>{content.name}</Link>
-              </GenreItem>
-            ))) ||
-            (pathname.includes("/browse/movie") &&
-              result &&
-              result.getGenreMovie &&
-              result.getGenreMovie.map((content) => (
-                <GenreItem key={content.id}>
-                  <Link to={`/browse/movie/${content.id}`}>{content.name}</Link>
-                </GenreItem>
-              )))}
-        </Wrapper>
+          {(pathname.includes("/browse/tv") && "TV 프로그램 ＞") ||
+            (pathname.includes("/browse/movie") && "영화 ＞")}
+        </PageBack>
+      )}
+      <GenreBox>
+        {isNaN(pathname.split("/")[3]) ? (
+          <>
+            <Button
+              isOpen={isOpen}
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}
+            >
+              <Text>장르</Text>
+              <DownArrow />
+            </Button>
+            <Wrapper isOpen={isOpen}>
+              {(pathname.includes("/browse/tv") &&
+                result &&
+                result.getGenreTV &&
+                result.getGenreTV.map((content) => (
+                  <GenreItem key={content.id}>
+                    <Link
+                      to={`/browse/tv/${content.id}`}
+                      onClick={() => {
+                        setGenre(content.name);
+                      }}
+                    >
+                      {content.name}
+                    </Link>
+                  </GenreItem>
+                ))) ||
+                (pathname.includes("/browse/movie") &&
+                  result &&
+                  result.getGenreMovie &&
+                  result.getGenreMovie.map((content) => (
+                    <GenreItem key={content.id}>
+                      <Link
+                        to={`/browse/movie/${content.id}`}
+                        onClick={() => {
+                          setGenre(content.name);
+                        }}
+                      >
+                        {content.name}
+                      </Link>
+                    </GenreItem>
+                  )))}
+            </Wrapper>
+          </>
+        ) : (
+          <GenreText>{genre}</GenreText>
+        )}
       </GenreBox>
     </Block>
   );
