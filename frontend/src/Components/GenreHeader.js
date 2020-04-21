@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled, { css, keyframes } from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 import { movieApi, tvApi } from "../lib/api/home";
+import FlixContext from "../contexts/FlixContext";
 
 const fadeIn = keyframes`
  from{
@@ -132,9 +133,18 @@ const useFetch = () => {
 };
 
 const GenreHeader = ({ history, location: { pathname }, scrollY }) => {
+  const { state, actions } = useContext(FlixContext);
   const { result } = useFetch();
   const [isOpen, setIsOpen] = useState(false);
   const [genre, setGenre] = useState(); // 장르 텍스트 설정
+
+  useEffect(() => {
+    // 장르 선택 후 새로고침 시 각 해당페이지로 이동
+    if (!isNaN(pathname.split("/")[3]) && state.selectedGenre === "") {
+      (pathname.includes("/browse/tv") && history.push("/browse/tv")) ||
+        (pathname.includes("/browse/movie") && history.push("/browse/movie"));
+    }
+  }, [history, state.selectedGenre, pathname]);
 
   return (
     <Block scrollY={scrollY}>
@@ -175,6 +185,7 @@ const GenreHeader = ({ history, location: { pathname }, scrollY }) => {
                       to={`/browse/tv/${content.id}`}
                       onClick={() => {
                         setGenre(content.name);
+                        actions.setSelectedGenre(content.id);
                       }}
                     >
                       {content.name}
@@ -190,6 +201,7 @@ const GenreHeader = ({ history, location: { pathname }, scrollY }) => {
                         to={`/browse/movie/${content.id}`}
                         onClick={() => {
                           setGenre(content.name);
+                          actions.setSelectedGenre(content.id);
                         }}
                       >
                         {content.name}

@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext, useEffect } from "react";
 import searchWhite from "../../assets/search_white.png";
 import styled, { css } from "styled-components";
 import { withRouter } from "react-router-dom";
-import SearchContext from "../../contexts/search";
+import FlixContext from "../../contexts/FlixContext";
 
 const SearchBlock = styled.div`
   height: 100%;
@@ -109,7 +109,7 @@ const Delete = styled.div`
   }
 `;
 const Search = ({ history, currentRoute }) => {
-  const { state, actions } = useContext(SearchContext);
+  const { state, actions } = useContext(FlixContext);
   const inputRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false); //Search탭 오픈 유무
 

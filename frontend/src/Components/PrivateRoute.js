@@ -3,7 +3,7 @@ import { Route, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "./Header";
 import { useScroll } from "../lib/hooks/useScroll";
-import { SearchProvider } from "../contexts/search";
+import { FlixProvider } from "../contexts/FlixContext";
 
 const PrivateRoute = ({
   location: { pathname },
@@ -29,10 +29,10 @@ const PrivateRoute = ({
   }, [history, user]);
 
   return (
-    <SearchProvider>
+    <FlixProvider>
       <Header currentRoute={pathname} scrollY={y} />
       <Route path={path} component={component} {...rest}></Route>
-    </SearchProvider>
+    </FlixProvider>
   );
 };
 

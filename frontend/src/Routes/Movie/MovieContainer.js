@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import MoviePresenter from "./MoviePresenter";
 import { movieApi } from "../../lib/api/home";
+import FlixContext from "../../contexts/FlixContext";
 
 const MovieContainer = () => {
+  const { state } = useContext(FlixContext);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchData = async () => {
       let id = 76341;
@@ -21,7 +24,7 @@ const MovieContainer = () => {
         } = await movieApi.movieTrendingWeek();
         const {
           data: { results: movieDiscover },
-        } = await movieApi.movieDiscover(28, 1);
+        } = await movieApi.movieDiscover(state.selectedGenre, 1);
 
         setResult({
           movieSimilar,
@@ -36,7 +39,7 @@ const MovieContainer = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [state.selectedGenre]);
   return <MoviePresenter result={result} loading={loading} error={error} />;
 };
 
