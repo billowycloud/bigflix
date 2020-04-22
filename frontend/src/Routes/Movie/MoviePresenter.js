@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import GenreHeader from "../../Components/GenreHeader";
 import { useScroll } from "../../lib/hooks/useScroll";
@@ -7,17 +7,11 @@ import Section from "../../Components/Contents/Section";
 import Poster from "../../Components/Contents/Poster";
 import { withRouter } from "react-router-dom";
 import GridTemplate from "../../Components/GridTemplate";
+import TopSection from "../../Components/Contents/TopSection";
 
 const Block = styled.div`
-  margin-top: 2rem;
-`;
-
-const MovieHeader = styled.div`
-  margin-top: 5rem;
-  background: url("https://image.tmdb.org/t/p/original/uozb2VeD87YmhoUP1RrGWfzuCrr.jpg");
-  background-position: center center;
-  background-size: cover;
-  height: 45rem;
+  position: relative;
+  top: -2.8rem;
 `;
 
 const Wrapper = styled.div`
@@ -26,6 +20,10 @@ const Wrapper = styled.div`
 
 const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
   const { y } = useScroll();
+  const [headerImg, setHeaderImg] = useState(); //대표 이미지
+  useEffect(() => {
+    setHeaderImg(Math.floor(Math.random() * 10)); // movieTrendingDay 10개 랜덤 출력
+  }, []);
   return loading ? (
     <Loader />
   ) : (
@@ -33,48 +31,46 @@ const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
       <GenreHeader scrollY={y} path="/browse/movie" />
       {isNaN(pathname.split("/")[3]) ? (
         <>
-          <MovieHeader />
+          {result && result.movieTrendingDay && result.movieTrendingDay.length > 0 && (
+            <TopSection
+              result={
+                result.movieTrendingDay[headerImg] === null
+                  ? result.movieTrendingDay[0]
+                  : result.movieTrendingDay[headerImg]
+              }
+            />
+          )}
           <Block>
-            {result &&
-              result.movieTrendingDay &&
-              result.movieTrendingDay.length > 0 && (
-                <Section title="오늘 하루 인기 영화">
-                  {result.movieTrendingDay.map((content) => (
-                    <Poster
-                      key={content.id}
-                      id={content.id}
-                      title={content.title}
-                      imgUrl={content.poster_path}
-                      rating={content.vote_average}
-                      year={
-                        content.release_date &&
-                        content.release_date.substring(0, 4)
-                      }
-                      isGrid={false}
-                    />
-                  ))}
-                </Section>
-              )}
-            {result &&
-              result.movieTrendingWeek &&
-              result.movieTrendingWeek.length > 0 && (
-                <Section title="주간 인기 영화">
-                  {result.movieTrendingWeek.map((content) => (
-                    <Poster
-                      key={content.id}
-                      id={content.id}
-                      title={content.title}
-                      imgUrl={content.poster_path}
-                      rating={content.vote_average}
-                      year={
-                        content.release_date &&
-                        content.release_date.substring(0, 4)
-                      }
-                      isGrid={false}
-                    />
-                  ))}
-                </Section>
-              )}
+            {result && result.movieTrendingDay && result.movieTrendingDay.length > 0 && (
+              <Section title="오늘 하루 인기 영화">
+                {result.movieTrendingDay.map((content) => (
+                  <Poster
+                    key={content.id}
+                    id={content.id}
+                    title={content.title}
+                    imgUrl={content.poster_path}
+                    rating={content.vote_average}
+                    year={content.release_date && content.release_date.substring(0, 4)}
+                    isGrid={false}
+                  />
+                ))}
+              </Section>
+            )}
+            {result && result.movieTrendingWeek && result.movieTrendingWeek.length > 0 && (
+              <Section title="주간 인기 영화">
+                {result.movieTrendingWeek.map((content) => (
+                  <Poster
+                    key={content.id}
+                    id={content.id}
+                    title={content.title}
+                    imgUrl={content.poster_path}
+                    rating={content.vote_average}
+                    year={content.release_date && content.release_date.substring(0, 4)}
+                    isGrid={false}
+                  />
+                ))}
+              </Section>
+            )}
           </Block>
         </>
       ) : (
@@ -90,9 +86,7 @@ const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
                   title={content.title}
                   imgUrl={content.poster_path}
                   rating={content.vote_average}
-                  year={
-                    content.release_date && content.release_date.substring(0, 4)
-                  }
+                  year={content.release_date && content.release_date.substring(0, 4)}
                   isGrid={true}
                 />
               ))}

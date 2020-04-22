@@ -1,28 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Loader from "../../Components/Loader";
 import Section from "../../Components/Contents/Section";
 import Poster from "../../Components/Contents/Poster";
+import TopSection from "../../Components/Contents/TopSection";
 
 const Block = styled.div`
-  margin-top: 2rem;
-`;
-
-const HomeHeader = styled.div`
-  background: url("https://image.tmdb.org/t/p/original/nRXO2SnOA75OsWhNhXstHB8ZmI3.jpg");
-  background-position: center center;
-  background-size: cover;
-  height: 45rem;
-  /* random movie and tv [latest] */
+  position: relative;
+  top: -2.8rem;
 `;
 
 const HomePresenter = ({ result, loading, error }) => {
+  const [headerImg, setHeaderImg] = useState(); //대표 이미지
+  useEffect(() => {
+    setHeaderImg(Math.floor(Math.random() * 10)); // popularMovie 10개 랜덤 출력
+  }, []);
   return loading ? (
     <Loader />
   ) : (
     <>
       {result && result.popularMovie && result.popularMovie.length > 0 && (
-        <HomeHeader />
+        <TopSection
+          result={
+            result.popularMovie[headerImg] === null
+              ? result.popularMovie[0]
+              : result.popularMovie[headerImg]
+          }
+        />
       )}
       <Block>
         {result && result.popularMovie && result.popularMovie.length > 0 && (
@@ -34,9 +38,7 @@ const HomePresenter = ({ result, loading, error }) => {
                 title={content.title}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={
-                  content.release_date && content.release_date.substring(0, 4)
-                }
+                year={content.release_date && content.release_date.substring(0, 4)}
                 isGrid={false}
               />
             ))}
@@ -51,10 +53,7 @@ const HomePresenter = ({ result, loading, error }) => {
                 title={content.name}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={
-                  content.first_air_date &&
-                  content.first_air_date.substring(0, 4)
-                }
+                year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 isGrid={false}
               />
             ))}
@@ -69,10 +68,7 @@ const HomePresenter = ({ result, loading, error }) => {
                 title={content.name}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={
-                  content.first_air_date &&
-                  content.first_air_date.substring(0, 4)
-                }
+                year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 isGrid={false}
               />
             ))}
@@ -87,9 +83,7 @@ const HomePresenter = ({ result, loading, error }) => {
                 title={content.title}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={
-                  content.release_date && content.release_date.substring(0, 4)
-                }
+                year={content.release_date && content.release_date.substring(0, 4)}
                 isGrid={false}
               />
             ))}
@@ -104,10 +98,7 @@ const HomePresenter = ({ result, loading, error }) => {
                 title={content.name}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={
-                  content.first_air_date &&
-                  content.first_air_date.substring(0, 4)
-                }
+                year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 isGrid={false}
               />
             ))}
