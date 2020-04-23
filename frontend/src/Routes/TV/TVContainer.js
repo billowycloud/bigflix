@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import TVPresenter from "./TVPresenter";
 import { tvApi } from "../../lib/api/home";
+import FlixContext from "../../lib/contexts/FlixContext";
 
 const TVContainer = () => {
+  const { state } = useContext(FlixContext);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -21,7 +23,7 @@ const TVContainer = () => {
         } = await tvApi.tvTrendingWeek();
         const {
           data: { results: tvDiscover },
-        } = await tvApi.tvDiscover(10759, 1);
+        } = await tvApi.tvDiscover(state.selectedGenre, 1);
 
         setResult({ tvSimilar, tvTrendingDay, tvTrendingWeek, tvDiscover });
       } catch (e) {
@@ -31,7 +33,7 @@ const TVContainer = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [state.selectedGenre]);
   return <TVPresenter result={result} loading={loading} error={error} />;
 };
 

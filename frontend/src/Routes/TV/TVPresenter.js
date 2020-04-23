@@ -54,6 +54,7 @@ const TVPresenter = ({ result, loading, error, location: { pathname } }) => {
                       content.first_air_date && content.first_air_date.substring(0, 4)
                     }
                     isGrid={false}
+                    isMovie={false}
                   />
                 ))}
               </Section>
@@ -71,6 +72,7 @@ const TVPresenter = ({ result, loading, error, location: { pathname } }) => {
                       content.first_air_date && content.first_air_date.substring(0, 4)
                     }
                     isGrid={false}
+                    isMovie={false}
                   />
                 ))}
               </Section>
@@ -92,6 +94,7 @@ const TVPresenter = ({ result, loading, error, location: { pathname } }) => {
                   rating={content.vote_average}
                   year={content.first_air_date && content.first_air_date.substring(0, 4)}
                   isGrid={true}
+                  isMovie={false}
                 />
               ))}
           </GridTemplate>

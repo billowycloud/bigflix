@@ -40,6 +40,7 @@ const HomePresenter = ({ result, loading, error }) => {
                 rating={content.vote_average}
                 year={content.release_date && content.release_date.substring(0, 4)}
                 isGrid={false}
+                isMovie={true}
               />
             ))}
           </Section>
@@ -55,6 +56,7 @@ const HomePresenter = ({ result, loading, error }) => {
                 rating={content.vote_average}
                 year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 isGrid={false}
+                isMovie={false}
               />
             ))}
           </Section>
@@ -70,6 +72,7 @@ const HomePresenter = ({ result, loading, error }) => {
                 rating={content.vote_average}
                 year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 isGrid={false}
+                isMovie={false}
               />
             ))}
           </Section>
@@ -85,6 +88,7 @@ const HomePresenter = ({ result, loading, error }) => {
                 rating={content.vote_average}
                 year={content.release_date && content.release_date.substring(0, 4)}
                 isGrid={false}
+                isMovie={true}
               />
             ))}
           </Section>
@@ -100,6 +104,7 @@ const HomePresenter = ({ result, loading, error }) => {
                 rating={content.vote_average}
                 year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 isGrid={false}
+                isMovie={false}
               />
             ))}
           </Section>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import SearchPresenter from "./SearchPresenter";
 import { multiApi } from "../../lib/api/home";
-import FlixContext from "../../contexts/FlixContext";
+import FlixContext from "../../lib/contexts/FlixContext";
 
 const SearchContainer = ({ history }) => {
   const { state } = useContext(FlixContext);

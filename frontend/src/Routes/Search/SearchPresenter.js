@@ -25,11 +25,9 @@ const SearchPresenter = ({ results, loading, error, searchValue }) => {
                     title={content.title}
                     imgUrl={content.poster_path}
                     rating={content.vote_average}
-                    year={
-                      content.release_date &&
-                      content.release_date.substring(0, 4)
-                    }
+                    year={content.release_date && content.release_date.substring(0, 4)}
                     isGrid={true}
+                    isMovie={true}
                   />
                 ) : (
                   <Poster
@@ -39,10 +37,10 @@ const SearchPresenter = ({ results, loading, error, searchValue }) => {
                     imgUrl={content.poster_path}
                     rating={content.vote_average}
                     year={
-                      content.first_air_date &&
-                      content.first_air_date.substring(0, 4)
+                      content.first_air_date && content.first_air_date.substring(0, 4)
                     }
                     isGrid={true}
+                    isMovie={false}
                   />
                 )
               )
@@ -53,10 +51,9 @@ const SearchPresenter = ({ results, loading, error, searchValue }) => {
                 title={content.title}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={
-                  content.release_date && content.release_date.substring(0, 4)
-                }
+                year={content.release_date && content.release_date.substring(0, 4)}
                 isGrid={true}
+                isMovie={true}
               />
             ) : (
               <Poster
@@ -65,11 +62,9 @@ const SearchPresenter = ({ results, loading, error, searchValue }) => {
                 title={content.name}
                 imgUrl={content.poster_path}
                 rating={content.vote_average}
-                year={
-                  content.first_air_date &&
-                  content.first_air_date.substring(0, 4)
-                }
+                year={content.first_air_date && content.first_air_date.substring(0, 4)}
                 isGrid={true}
+                isMovie={false}
               />
             )
           )}

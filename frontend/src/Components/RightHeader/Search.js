@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext, useEffect } from "react";
 import searchWhite from "../../assets/search_white.png";
 import styled, { css } from "styled-components";
 import { withRouter } from "react-router-dom";
-import FlixContext from "../../contexts/FlixContext";
+import FlixContext from "../../lib/contexts/FlixContext";
 
 const SearchBlock = styled.div`
   height: 100%;
@@ -115,11 +115,7 @@ const Search = ({ history, currentRoute }) => {
 
   useEffect(() => {
     /* Search탭이 열린채로 다른라우터 이동 시 닫기 */
-    if (
-      isOpen &&
-      inputRef.current.value.length > 0 &&
-      !currentRoute.includes("search")
-    ) {
+    if (isOpen && inputRef.current.value.length > 0 && !currentRoute.includes("search")) {
       inputRef.current.value = "";
       setIsOpen(false);
     }

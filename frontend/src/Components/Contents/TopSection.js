@@ -57,7 +57,7 @@ const TopSection = ({ result }) => {
       <BackDrop imageUrl={result.backdrop_path} />
       <Info>
         <Title>{result.title || result.name}</Title>
-        <Overview>{result.overview}</Overview>
+        <Overview>&nbsp;{result.overview}</Overview>
         <Button>▶ 재생</Button>
         <Button>ⓘ 상세 정보</Button>
       </Info>

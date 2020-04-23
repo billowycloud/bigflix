@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import MoviePresenter from "./MoviePresenter";
 import { movieApi } from "../../lib/api/home";
-import FlixContext from "../../contexts/FlixContext";
+import FlixContext from "../../lib/contexts/FlixContext";
 
 const MovieContainer = () => {
   const { state } = useContext(FlixContext);

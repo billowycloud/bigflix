@@ -52,6 +52,7 @@ const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
                     rating={content.vote_average}
                     year={content.release_date && content.release_date.substring(0, 4)}
                     isGrid={false}
+                    isMovie={true}
                   />
                 ))}
               </Section>
@@ -67,6 +68,7 @@ const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
                     rating={content.vote_average}
                     year={content.release_date && content.release_date.substring(0, 4)}
                     isGrid={false}
+                    isMovie={true}
                   />
                 ))}
               </Section>
@@ -88,6 +90,7 @@ const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
                   rating={content.vote_average}
                   year={content.release_date && content.release_date.substring(0, 4)}
                   isGrid={true}
+                  isMovie={true}
                 />
               ))}
           </GridTemplate>

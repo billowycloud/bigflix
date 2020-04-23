@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { Rating } from "./Rating";
+import ModalPortal from "../../lib/ModalPortal";
+import DetailContainer from "../Detail/DetailContainer";
 
 const FadeIn = keyframes`
   from {
@@ -31,7 +33,6 @@ const Img = styled.img`
       : css`
           height: 80%;
         `}
-  cursor: pointer;
   transition: width 0.5s, height 0.5s;
   -webkit-transition: width 0.5s, height 0.5s;
 `;
@@ -59,6 +60,7 @@ const ImgWrapper = styled.div`
 `;
 
 const Block = styled.div`
+  cursor: pointer;
   &:hover {
     ${DetailBlock} {
       opacity: 1;
@@ -78,26 +80,40 @@ const Block = styled.div`
   }
 `;
 
-const Poster = ({ id, title, imgUrl, rating, year, isGrid }) => {
+const Poster = ({ id, title, imgUrl, rating, year, isGrid, isMovie }) => {
+  const [modal, setModal] = useState(false);
+  const handleOpenModal = () => {
+    setModal(true);
+  };
+  const handleCloseModal = () => {
+    setModal(false);
+  };
   return (
-    <Block isGrid={isGrid}>
-      <ImgWrapper isGrid={isGrid}>
-        <Img
-          src={
-            imgUrl
-              ? `https://image.tmdb.org/t/p/w500/${imgUrl}`
-              : require("../../assets/noPoster.png")
-          }
-          alt={title}
-          isGrid={isGrid}
-        />
-        <DetailBlock isGrid={isGrid}>
-          <Title isGrid={isGrid}>{title}</Title>
-          <Year isGrid={isGrid}>{year}</Year>
-          <Rating rating={rating} />
-        </DetailBlock>
-      </ImgWrapper>
-    </Block>
+    <>
+      <Block onClick={handleOpenModal} isGrid={isGrid}>
+        <ImgWrapper isGrid={isGrid}>
+          <Img
+            src={
+              imgUrl
+                ? `https://image.tmdb.org/t/p/w500/${imgUrl}`
+                : require("../../assets/noPoster.png")
+            }
+            alt={title}
+            isGrid={isGrid}
+          />
+          <DetailBlock isGrid={isGrid}>
+            <Title isGrid={isGrid}>{title}</Title>
+            <Year isGrid={isGrid}>{year}</Year>
+            <Rating rating={rating} />
+          </DetailBlock>
+        </ImgWrapper>
+      </Block>
+      {modal && (
+        <ModalPortal>
+          <DetailContainer id={id} isMovie={isMovie} onClose={handleCloseModal} />
+        </ModalPortal>
+      )}
+    </>
   );
 };
 

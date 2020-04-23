@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import styled, { css, keyframes } from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 import { movieApi, tvApi } from "../lib/api/home";
-import FlixContext from "../contexts/FlixContext";
+import FlixContext from "../lib/contexts/FlixContext";
 
 const fadeIn = keyframes`
  from{

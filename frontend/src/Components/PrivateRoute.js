@@ -3,15 +3,9 @@ import { Route, withRouter } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "./Header";
 import { useScroll } from "../lib/hooks/useScroll";
-import { FlixProvider } from "../contexts/FlixContext";
+import { FlixProvider } from "../lib/contexts/FlixContext";
 
-const PrivateRoute = ({
-  location: { pathname },
-  history,
-  path,
-  component,
-  ...rest
-}) => {
+const PrivateRoute = ({ location: { pathname }, history, path, component, ...rest }) => {
   const { user } = useSelector(({ user }) => ({
     user: user.user,
   }));
