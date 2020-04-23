@@ -9,16 +9,17 @@ const DetailContainer = ({ id, isMovie, onClose }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let result = null;
       try {
         if (isMovie) {
-          ({ data: result } = await movieApi.movieDetail(id));
+          const { data } = await movieApi.movieDetail(id);
+          setResult(data);
         } else {
-          ({ data: result } = await tvApi.tvDetail(id));
+          const { data } = await tvApi.tvDetail(id);
+          setResult(data);
         }
-        setResult({ result });
       } catch (e) {
         setError(e);
+        setResult(null);
       } finally {
         setLoading(false);
       }
