@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import Loader from "../Loader";
 import { Rating } from "../Contents/Rating";
-
+import StyleButton from "../Button";
+import closeIcon from "../../assets/close_white.png";
 const Block = styled.div`
   background: rgba(0, 0, 0, 0.6);
   position: fixed;
@@ -53,40 +54,58 @@ const Info = styled.div`
   z-index: 101;
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  width: calc(100vw * 0.25);
+  min-width: 30rem;
+`;
 
 const Title = styled.h3`
-  width: 35rem;
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 0.7rem;
 `;
 
 const SubInfo = styled.div`
-  width: 35rem;
   display: flex;
   margin-bottom: 0.5rem;
 `;
 
 const Item = styled.div`
+  line-height: 1.1rem;
   font-size: 1rem;
   margin-right: 1rem;
+  &:first-child {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  &:last-child {
+    color: gray;
+  }
 `;
 
 const Overview = styled.p`
-  width: 35rem;
   font-size: 0.9rem;
   line-height: 1.2rem;
   margin-top: 0.5rem;
+  color: gray;
+  margin-bottom: 0.5rem;
 `;
 
 const CloseButton = styled.div`
-  width: 20px;
-  height: 20px;
   position: absolute;
   top: 2rem;
   right: 2rem;
   z-index: 102;
+  cursor: pointer;
+
+  img {
+    width: 40px;
+    height: 40px;
+    -webkit-transition: 0.3s;
+    &:hover {
+      -webkit-transform: scale(1.2);
+    }
+  }
 `;
 
 const DetailModal = ({ onClose, result, loading, error }) => {
@@ -102,21 +121,22 @@ const DetailModal = ({ onClose, result, loading, error }) => {
               <Item>
                 {result.release_date
                   ? result.release_date && result.release_date.substring(0, 4)
-                  : result.first_air_date &&
-                    result.first_air_date.substring(0, 4)}
+                  : result.first_air_date && result.first_air_date.substring(0, 4)}
               </Item>
               <Item>{result.runtime ? `${result.runtime}분` : ""}</Item>
               <Item>
                 {result.genres &&
                   result.genres.map((genre, index) =>
-                    index === result.genres.length - 1
-                      ? genre.name
-                      : `${genre.name} • `
+                    index === result.genres.length - 1 ? genre.name : `${genre.name} • `
                   )}
               </Item>
             </SubInfo>
             <Rating rating={result.vote_average} />
             <Overview>&nbsp;{result.overview}</Overview>
+            <div>
+              <StyleButton>▶ 재생</StyleButton>
+              <StyleButton>찜하기</StyleButton>
+            </div>
           </Wrapper>
         </Info>
         <BackDrop
@@ -126,7 +146,9 @@ const DetailModal = ({ onClose, result, loading, error }) => {
               : require("../../assets/noPoster.png")
           }
         />
-        <CloseButton onClick={onClose}>닫기</CloseButton>
+        <CloseButton onClick={onClose}>
+          <img src={closeIcon} alt="close" />
+        </CloseButton>
       </Content>
     </Block>
   );

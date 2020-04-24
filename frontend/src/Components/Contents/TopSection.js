@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import StyleButton from "../Button";
 const Block = styled.div`
   position: relative;
 `;
@@ -12,6 +12,8 @@ const BackDrop = styled.div`
 `;
 const Info = styled.div`
   position: absolute;
+  width: calc(100vw * 0.5);
+  min-width: 850px;
   bottom: 15rem;
   padding-left: 3rem;
 `;
@@ -27,29 +29,6 @@ const Overview = styled.p`
   text-shadow: 1px 1px 2px rgb(0, 0, 0);
   margin-bottom: 1rem;
 `;
-const Button = styled.div`
-  font-weight: bold;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  text-align: center;
-  display: inline-block;
-  background: rgba(23, 23, 23, 0.3);
-  border-radius: 5px;
-  cursor: pointer;
-  -webkit-transition: 0.3s;
-
-  &:hover {
-    -webkit-transform: scale(1.1);
-    color: black;
-    background: #e6e6e6;
-    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-  }
-  & + & {
-    margin-left: 1.3rem;
-  }
-`;
 
 const TopSection = ({ result }) => {
   return (
@@ -58,8 +37,8 @@ const TopSection = ({ result }) => {
       <Info>
         <Title>{result.title || result.name}</Title>
         <Overview>&nbsp;{result.overview}</Overview>
-        <Button>▶ 재생</Button>
-        <Button>ⓘ 상세 정보</Button>
+        <StyleButton>▶ 재생</StyleButton>
+        <StyleButton>ⓘ 상세 정보</StyleButton>
       </Info>
     </Block>
   );
