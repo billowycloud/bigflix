@@ -143,7 +143,7 @@ const DetailModal = ({ onClose, result, loading, error }) => {
           imgUrl={
             result.backdrop_path
               ? `https://image.tmdb.org/t/p/original/${result.backdrop_path}`
-              : require("../../assets/noPoster.png")
+              : require("../../assets/noBackdrop.png")
           }
         />
         <CloseButton onClick={onClose}>

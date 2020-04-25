@@ -41,7 +41,7 @@ const Item = styled.li`
   &:first-child {
     margin-right: 1rem;
   }
-  width: 9rem;
+  width: 10rem;
   height: 100%;
   display: flex;
   justify-content: center;
@@ -123,6 +123,9 @@ const Header = ({ location: { pathname }, scrollY, currentRoute }) => {
           </Item>
           <Item current={pathname === "/browse/movie"}>
             <SLink to="/browse/movie">영화</SLink>
+          </Item>
+          <Item current={pathname === "/browse/mylist"}>
+            <SLink to="/browse/mylist">내가 찜한 콘텐츠</SLink>
           </Item>
         </LeftItemBlock>
         <RightItemBlock>

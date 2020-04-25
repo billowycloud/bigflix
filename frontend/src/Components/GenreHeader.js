@@ -38,6 +38,7 @@ const Block = styled.div`
 const PageName = styled.h1`
   font-weight: bold;
   font-size: 2rem;
+  text-shadow: 2px 2px 2px rgba(20, 20, 20, 0.7);
 `;
 
 const PageBack = styled.h1`

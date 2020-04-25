@@ -9,6 +9,7 @@ import Register from "../Routes/Register";
 import PrivateRoute from "./PrivateRoute";
 import Footer from "./Footer";
 import Search from "../Routes/Search";
+import MyList from "../Routes/MyList";
 
 export default () => (
   <Router>
@@ -21,6 +22,7 @@ export default () => (
         <PrivateRoute path="/browse/movie" exact component={Movie} />
         <PrivateRoute path="/browse/tv/:genre" component={TV} />
         <PrivateRoute path="/browse/movie/:genre" component={Movie} />
+        <PrivateRoute path="/browse/mylist" component={MyList} />
         <PrivateRoute path="/search" component={Search} />
         <Redirect from="*" to="/" />
       </Switch>

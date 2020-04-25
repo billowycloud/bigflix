@@ -13,7 +13,7 @@ const Block = styled.div`
 const HomePresenter = ({ result, loading, error }) => {
   const [headerImg, setHeaderImg] = useState(); //대표 이미지
   useEffect(() => {
-    setHeaderImg(Math.floor(Math.random() * 10)); // popularMovie 10개 랜덤 출력
+    setHeaderImg(Math.floor(Math.random() * 20)); // popularMovie 10개 랜덤 출력
   }, []);
   return loading ? (
     <Loader />
@@ -22,7 +22,8 @@ const HomePresenter = ({ result, loading, error }) => {
       {result && result.popularMovie && result.popularMovie.length > 0 && (
         <TopSection
           result={
-            result.popularMovie[headerImg] === null
+            result.popularMovie[headerImg].backdrop_path === null ||
+            result.popularMovie[headerImg].overview === ""
               ? result.popularMovie[0]
               : result.popularMovie[headerImg]
           }

@@ -22,7 +22,7 @@ const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
   const { y } = useScroll();
   const [headerImg, setHeaderImg] = useState(); //대표 이미지
   useEffect(() => {
-    setHeaderImg(Math.floor(Math.random() * 10)); // movieTrendingDay 10개 랜덤 출력
+    setHeaderImg(Math.floor(Math.random() * 20)); // movieTrendingDay 10개 랜덤 출력
   }, []);
   return loading ? (
     <Loader />
@@ -31,12 +31,13 @@ const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
       <GenreHeader scrollY={y} path="/browse/movie" />
       {isNaN(pathname.split("/")[3]) ? (
         <>
-          {result && result.movieTrendingDay && result.movieTrendingDay.length > 0 && (
+          {result && result.movieTrendingWeek && result.movieTrendingWeek.length > 0 && (
             <TopSection
               result={
-                result.movieTrendingDay[headerImg] === null
-                  ? result.movieTrendingDay[0]
-                  : result.movieTrendingDay[headerImg]
+                result.movieTrendingWeek[headerImg].backdrop_path === null ||
+                result.movieTrendingWeek[headerImg].overview === ""
+                  ? result.movieTrendingWeek[0]
+                  : result.movieTrendingWeek[headerImg]
               }
             />
           )}

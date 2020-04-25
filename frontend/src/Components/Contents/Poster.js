@@ -82,6 +82,7 @@ const Block = styled.div`
 
 const Poster = ({ id, title, imgUrl, rating, year, isGrid, isMovie }) => {
   const [modal, setModal] = useState(false);
+
   const handleOpenModal = () => {
     setModal(true);
   };
