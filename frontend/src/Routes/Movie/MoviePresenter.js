@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import GenreHeader from "../../Components/GenreHeader";
-import { useScroll } from "../../lib/hooks/useScroll";
 import Loader from "../../Components/Loader";
 import Section from "../../Components/Contents/Section";
 import Poster from "../../Components/Contents/Poster";
@@ -19,7 +18,6 @@ const Wrapper = styled.div`
 `;
 
 const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
-  const { y } = useScroll();
   const [headerImg, setHeaderImg] = useState(); //대표 이미지
   useEffect(() => {
     setHeaderImg(Math.floor(Math.random() * 20)); // movieTrendingDay 10개 랜덤 출력
@@ -28,7 +26,7 @@ const MoviePresenter = ({ result, loading, error, location: { pathname } }) => {
     <Loader />
   ) : (
     <>
-      <GenreHeader scrollY={y} path="/browse/movie" />
+      <GenreHeader path="/browse/movie" />
       {isNaN(pathname.split("/")[3]) ? (
         <>
           {result && result.movieTrendingWeek && result.movieTrendingWeek.length > 0 && (

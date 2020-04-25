@@ -3,6 +3,7 @@ import styled, { css, keyframes } from "styled-components";
 import { withRouter, Link } from "react-router-dom";
 import { movieApi, tvApi } from "../lib/api/home";
 import FlixContext from "../lib/contexts/FlixContext";
+import { useScroll } from "../lib/hooks/useScroll";
 
 const fadeIn = keyframes`
  from{
@@ -18,7 +19,7 @@ const Block = styled.div`
   position: fixed;
 
   ${(props) =>
-    props.scrollY === 0
+    props.direction === 1 || props.scrollY === 0
       ? css`
           top: 5rem;
           background: transparent;
@@ -28,6 +29,7 @@ const Block = styled.div`
           top: 0;
           background: rgb(20, 20, 20);
         `}
+
   width: 100%;
   height: 4rem;
   display: flex;
@@ -138,6 +140,7 @@ const GenreHeader = ({ history, location: { pathname }, scrollY }) => {
   const { result } = useFetch();
   const [isOpen, setIsOpen] = useState(false);
   const [genre, setGenre] = useState(); // 장르 텍스트 설정
+  const { y, direction } = useScroll();
 
   useEffect(() => {
     // 장르 선택 후 새로고침 시 각 해당페이지로 이동
@@ -148,7 +151,7 @@ const GenreHeader = ({ history, location: { pathname }, scrollY }) => {
   }, [history, state.selectedGenre, pathname]);
 
   return (
-    <Block scrollY={scrollY}>
+    <Block scrollY={y} direction={direction}>
       {isNaN(pathname.split("/")[3]) ? (
         <PageName>
           {(pathname.includes("/browse/tv") && "TV 프로그램") ||

@@ -15,7 +15,13 @@ const HeaderBlock = styled.header`
   height: 5rem;
   background: rgb(20, 20, 20);
   z-index: 10;
-  display: ${(props) => props.current && props.scrollY !== 0 && "none"};
+  ${(props) =>
+    props.current &&
+    (props.direction === 1 ||
+      (props.scrollY !== 0 &&
+        css`
+          display: none;
+        `))};
   ${(props) =>
     props.headerY === 0 &&
     !props.current &&
@@ -100,13 +106,13 @@ const RightItemBlock = styled.div`
 `;
 
 const Header = ({ location: { pathname }, scrollY, currentRoute }) => {
-  const { y } = useScroll(); //headerY 헤더전용 스크롤
+  const { y, direction } = useScroll(); //headerY 헤더전용 스크롤
   return (
     /* 현재 페이지가 tv이거나 movie면 장르헤더 스크롤에 따라 감추기 */
     <HeaderBlock
-      scrollY={scrollY}
       current={pathname === "/browse/tv" || pathname === "/browse/movie"}
       headerY={y}
+      direction={direction}
     >
       <List>
         <LeftItemBlock>
