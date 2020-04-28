@@ -4,7 +4,7 @@ export const useScroll = () => {
   const [state, setState] = useState({
     x: 0,
     y: 0,
-    direction: 0,
+    direction: 1,
   });
   const onScroll = useCallback(
     (e) => {

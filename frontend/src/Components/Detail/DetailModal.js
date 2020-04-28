@@ -1,9 +1,10 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
 import Loader from "../Loader";
 import { Rating } from "../Contents/Rating";
 import StyleButton from "../Button";
 import closeIcon from "../../assets/close_white.png";
+import Similar from "../Similar";
 const Block = styled.div`
   background: rgba(0, 0, 0, 0.6);
   position: fixed;
@@ -21,6 +22,16 @@ const Content = styled.div`
   width: 100%;
   height: calc(100vh - 20rem);
   position: relative;
+`;
+
+const BlackBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 21%;
+  height: 100%;
+  background: black;
+  z-index: 101;
 `;
 
 const BackDrop = styled.div`
@@ -48,15 +59,15 @@ const Info = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 21%;
+
   height: 100%;
-  background: black;
-  z-index: 101;
+  z-index: 102;
 `;
 
 const Wrapper = styled.div`
   width: calc(100vw * 0.25);
   min-width: 30rem;
+  z-index: 105;
 `;
 
 const Title = styled.h3`
@@ -95,7 +106,7 @@ const CloseButton = styled.div`
   position: absolute;
   top: 2rem;
   right: 2rem;
-  z-index: 102;
+  z-index: 104;
   cursor: pointer;
 
   img {
@@ -108,37 +119,136 @@ const CloseButton = styled.div`
   }
 `;
 
-const DetailModal = ({ onClose, result, loading, error }) => {
+const ModalRouter = styled.div`
+  z-index: 104;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 1024px;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ModalItem = styled.div`
+  height: 100%;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  ${(props) =>
+    props.current === 1 &&
+    css`
+      :first-child {
+        border-bottom: 6px solid #c21f2a;
+      }
+    `};
+  ${(props) =>
+    props.current === 2 &&
+    css`
+      :nth-child(2) {
+        border-bottom: 6px solid #c21f2a;
+      }
+    `};
+  ${(props) =>
+    props.current === 3 &&
+    css`
+      :last-child {
+        border-bottom: 6px solid #c21f2a;
+      }
+    `};
+  cursor: pointer;
+`;
+
+const Opacity = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.8);
+  z-index: 103;
+`;
+
+const DetailModal = ({ onClose, result, isMovie, loading, error }) => {
+  const [router, setRouter] = useState(1);
   return loading ? (
     <Loader />
   ) : (
     <Block>
       <Content>
-        <Info>
-          <Wrapper>
-            <Title>{result.title ? result.title : result.name}</Title>
-            <SubInfo>
-              <Item>
-                {result.release_date
-                  ? result.release_date && result.release_date.substring(0, 4)
-                  : result.first_air_date && result.first_air_date.substring(0, 4)}
-              </Item>
-              <Item>{result.runtime ? `${result.runtime}분` : ""}</Item>
-              <Item>
-                {result.genres &&
-                  result.genres.map((genre, index) =>
-                    index === result.genres.length - 1 ? genre.name : `${genre.name} • `
-                  )}
-              </Item>
-            </SubInfo>
-            <Rating rating={result.vote_average} />
-            <Overview>&nbsp;{result.overview}</Overview>
-            <div>
-              <StyleButton>▶ 재생</StyleButton>
-              <StyleButton>찜하기</StyleButton>
-            </div>
-          </Wrapper>
-        </Info>
+        {router === 1 && (
+          <Info>
+            <Wrapper>
+              <Title>{result.title ? result.title : result.name}</Title>
+              <SubInfo>
+                <Item>
+                  {result.release_date
+                    ? result.release_date && result.release_date.substring(0, 4)
+                    : result.first_air_date && result.first_air_date.substring(0, 4)}
+                </Item>
+                <Item>{result.runtime ? `${result.runtime}분` : ""}</Item>
+                <Item>
+                  {result.genres &&
+                    result.genres.map((genre, index) =>
+                      index === result.genres.length - 1 ? genre.name : `${genre.name} • `
+                    )}
+                </Item>
+              </SubInfo>
+              <Rating rating={result.vote_average} />
+              <Overview>&nbsp;{result.overview}</Overview>
+              <div>
+                <StyleButton>▶ 재생</StyleButton>
+                <StyleButton>찜하기</StyleButton>
+              </div>
+            </Wrapper>
+          </Info>
+        )}
+        {router === 2 && !isMovie && (
+          <Opacity>
+            <Wrapper>이건TV</Wrapper>
+          </Opacity>
+        )}
+        {router === 3 && result && (
+          <Opacity>
+            <Similar
+              id={result.id}
+              title={isMovie ? result.title : result.name}
+              isMovie={isMovie}
+            />
+          </Opacity>
+        )}
+
+        <ModalRouter>
+          <ModalItem
+            onClick={() => {
+              setRouter(1);
+            }}
+            current={router}
+          >
+            콘텐츠 정보
+          </ModalItem>
+          {!isMovie && (
+            <ModalItem
+              onClick={() => {
+                setRouter(2);
+              }}
+              current={router}
+            >
+              회차 정보
+            </ModalItem>
+          )}
+          <ModalItem
+            onClick={() => {
+              setRouter(3);
+            }}
+            current={router}
+          >
+            비슷한 콘텐츠
+          </ModalItem>
+        </ModalRouter>
+        <BlackBackground />
         <BackDrop
           imgUrl={
             result.backdrop_path

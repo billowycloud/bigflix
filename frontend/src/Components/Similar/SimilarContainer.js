@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import DetailModal from "./DetailModal";
+import SimilarPresenter from "./SimilarPresenter";
 import { movieApi, tvApi } from "../../lib/api/home";
 
-const DetailContainer = ({ id, isMovie, onClose }) => {
+const SimilarContainer = ({ isMovie, id, title }) => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,32 +11,33 @@ const DetailContainer = ({ id, isMovie, onClose }) => {
     const fetchData = async () => {
       try {
         if (isMovie) {
-          const { data } = await movieApi.movieDetail(id);
-          setResult(data);
+          const {
+            data: { results: movieSimilar },
+          } = await movieApi.movieSimilar(id);
+          setResult(movieSimilar);
         } else {
-          const { data } = await tvApi.tvDetail(id);
-          setResult(data);
+          const {
+            data: { results: tvSimilar },
+          } = await tvApi.tvSimilar(id);
+          setResult(tvSimilar);
         }
       } catch (e) {
-        setError(e);
-        setResult(null);
+        setError(e + "영화 정보를 찾을 수 없습니다.");
       } finally {
         setLoading(false);
       }
     };
     fetchData();
   }, [id, isMovie]);
-
   return (
-    <DetailModal
-      id={id}
-      onClose={onClose}
+    <SimilarPresenter
       result={result}
-      isMovie={isMovie}
       loading={loading}
       error={error}
+      isMovie={isMovie}
+      title={title}
     />
   );
 };
 
-export default DetailContainer;
+export default SimilarContainer;

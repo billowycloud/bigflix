@@ -25,17 +25,10 @@ const Title = styled.div`
 const Contents = styled.div`
   display: flex;
   white-space: nowrap;
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: hidden;
 `;
-const HideScroll = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 20px;
-  background: rgb(20, 20, 20);
-`;
+
 const BtnImage = styled.img`
   width: 0px;
 `;
@@ -176,10 +169,9 @@ const Section = ({ title, children }) => {
   };
   return (
     <Block>
-      <Title>{title}</Title>
+      {title && <Title>{title}</Title>}
       <Wrapper>
         <Contents ref={SliderRef}>{children}</Contents>
-        <HideScroll />
         <Button isLeft={true} isHideLeft={isHideLeft} onClick={clickLeft}>
           <BtnImage src={btnLeft} />
         </Button>
