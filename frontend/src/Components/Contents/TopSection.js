@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import StyleButton from "../Button";
+import ModalPortal from "../../lib/ModalPortal";
+import DetailContainer from "../Detail/DetailContainer";
+
 const Block = styled.div`
   position: relative;
 `;
@@ -30,17 +33,32 @@ const Overview = styled.p`
   margin-bottom: 1rem;
 `;
 
-const TopSection = ({ result }) => {
+const TopSection = ({ result, isMovie }) => {
+  const [modal, setModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setModal(true);
+  };
+  const handleCloseModal = () => {
+    setModal(false);
+  };
   return (
-    <Block>
-      <BackDrop imageUrl={result.backdrop_path} />
-      <Info>
-        <Title>{result.title || result.name}</Title>
-        <Overview>&nbsp;{result.overview}</Overview>
-        <StyleButton>▶ 재생</StyleButton>
-        <StyleButton>ⓘ 상세 정보</StyleButton>
-      </Info>
-    </Block>
+    <>
+      <Block>
+        <BackDrop imageUrl={result.backdrop_path} />
+        <Info>
+          <Title>{result.title || result.name}</Title>
+          <Overview>&nbsp;{result.overview}</Overview>
+          <StyleButton>▶ 재생</StyleButton>
+          <StyleButton onClick={handleOpenModal}>ⓘ 상세 정보</StyleButton>
+        </Info>
+      </Block>
+      {modal && (
+        <ModalPortal>
+          <DetailContainer id={result.id} isMovie={isMovie} onClose={handleCloseModal} />
+        </ModalPortal>
+      )}
+    </>
   );
 };
 

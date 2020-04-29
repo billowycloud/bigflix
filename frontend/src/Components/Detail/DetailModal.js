@@ -5,6 +5,7 @@ import { Rating } from "../Contents/Rating";
 import StyleButton from "../Button";
 import closeIcon from "../../assets/close_white.png";
 import Similar from "../Similar";
+import Season from "../Season";
 const Block = styled.div`
   background: rgba(0, 0, 0, 0.6);
   position: fixed;
@@ -207,7 +208,7 @@ const DetailModal = ({ onClose, result, isMovie, loading, error }) => {
         )}
         {router === 2 && !isMovie && (
           <Opacity>
-            <Wrapper>이건TV</Wrapper>
+            <Season name={result.name} id={result.id} seasons={result.seasons} />
           </Opacity>
         )}
         {router === 3 && result && (

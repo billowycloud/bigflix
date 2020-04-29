@@ -37,6 +37,7 @@ const TVPresenter = ({ result, loading, error, location: { pathname } }) => {
                   ? result.tvTrendingWeek[0]
                   : result.tvTrendingWeek[headerImg]
               }
+              isMovie={false}
             />
           )}
           <Block>

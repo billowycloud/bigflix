@@ -43,6 +43,7 @@ export const tvApi = {
         page: page,
       },
     }),
+  tvSeasons: (id, season_number) => Kor.get(`tv/${id}/season/${season_number}`),
 };
 
 export const multiApi = {

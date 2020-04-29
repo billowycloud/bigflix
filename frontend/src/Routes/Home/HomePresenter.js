@@ -27,6 +27,7 @@ const HomePresenter = ({ result, loading, error }) => {
               ? result.popularMovie[0]
               : result.popularMovie[headerImg]
           }
+          isMovie={true}
         />
       )}
       <Block>
