@@ -82,8 +82,6 @@ const SLink = styled(Link)`
 `;
 const Img = styled.img`
   width: 100%;
-  background-position: center center;
-  background-size: cover;
 `;
 
 const RightItem = styled.div`

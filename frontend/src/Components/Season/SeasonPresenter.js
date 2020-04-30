@@ -59,6 +59,7 @@ const DownArrow = styled.div`
 `;
 
 const Wrapper = styled.div`
+  z-index: 99;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(12, 12, 12, 0.9);
   top: 37px;
@@ -76,7 +77,7 @@ const Wrapper = styled.div`
 `;
 
 const Item = styled.div`
-  height: 1.8rem;
+  height: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;

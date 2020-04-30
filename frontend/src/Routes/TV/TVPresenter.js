@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 const TVPresenter = ({ result, loading, error, location: { pathname } }) => {
   const [headerImg, setHeaderImg] = useState(); //대표 이미지
   useEffect(() => {
-    setHeaderImg(Math.floor(Math.random() * 20)); // tvTrendingDay 10개 랜덤 출력
+    setHeaderImg(Math.floor(Math.random() * 10)); // tvTrendingDay 10개 랜덤 출력
   }, []);
   return loading ? (
     <Loader />
