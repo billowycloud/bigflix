@@ -6,6 +6,7 @@ import StyleButton from "../Button";
 import closeIcon from "../../assets/close_white.png";
 import Similar from "../Similar";
 import Season from "../Season";
+import ListCheck from "../ListCheck";
 const Block = styled.div`
   background: rgba(0, 0, 0, 0.6);
   position: fixed;
@@ -200,8 +201,22 @@ const DetailModal = ({ onClose, result, isMovie, loading, error }) => {
               <Rating rating={result.vote_average} />
               <Overview>&nbsp;{result.overview}</Overview>
               <div>
-                <StyleButton>▶ 재생</StyleButton>
-                <StyleButton>찜하기</StyleButton>
+                {result.videos.results.length !== 0 && (
+                  <StyleButton
+                    onClick={() => {
+                      setRouter(4);
+                    }}
+                  >
+                    ▶ 재생
+                  </StyleButton>
+                )}
+                <StyleButton>
+                  <ListCheck
+                    movieInfo={result}
+                    movieId={result.id}
+                    userFrom={JSON.parse(localStorage.getItem("user"))._id}
+                  />
+                </StyleButton>
               </div>
             </Wrapper>
           </Info>
@@ -220,35 +235,51 @@ const DetailModal = ({ onClose, result, isMovie, loading, error }) => {
             />
           </Opacity>
         )}
-
-        <ModalRouter>
-          <ModalItem
-            onClick={() => {
-              setRouter(1);
-            }}
-            current={router}
-          >
-            콘텐츠 정보
-          </ModalItem>
-          {!isMovie && (
+        {router === 4 && result && (
+          <Opacity>
+            <iframe
+              height="100%"
+              width="100%"
+              frameborder="0"
+              src={`https://www.youtube.com/embed/${result.videos.results[0].key}?autoplay=1&amp;version=3&amp;hd=1&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;fs=1`}
+              webkitallowfullscreen=""
+              mozallowfullscreen=""
+              allowfullscreen=""
+              allow="autoplay; fullscreen"
+              title={isMovie ? result.title : result.name}
+            ></iframe>
+          </Opacity>
+        )}
+        {router !== 4 && (
+          <ModalRouter>
             <ModalItem
               onClick={() => {
-                setRouter(2);
+                setRouter(1);
               }}
               current={router}
             >
-              회차 정보
+              콘텐츠 정보
             </ModalItem>
-          )}
-          <ModalItem
-            onClick={() => {
-              setRouter(3);
-            }}
-            current={router}
-          >
-            비슷한 콘텐츠
-          </ModalItem>
-        </ModalRouter>
+            {!isMovie && (
+              <ModalItem
+                onClick={() => {
+                  setRouter(2);
+                }}
+                current={router}
+              >
+                회차 정보
+              </ModalItem>
+            )}
+            <ModalItem
+              onClick={() => {
+                setRouter(3);
+              }}
+              current={router}
+            >
+              비슷한 콘텐츠
+            </ModalItem>
+          </ModalRouter>
+        )}
         <BlackBackground />
         <BackDrop
           imgUrl={
