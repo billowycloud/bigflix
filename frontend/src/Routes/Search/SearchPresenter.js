@@ -1,7 +1,7 @@
 import React from "react";
 import Loader from "../../Components/Loader";
 import Poster from "../../Components/Contents/Poster";
-import Message from "../../Components/Message";
+import SearchMessage from "../../Components/Message/SearchMessage";
 import GridTemplate from "../../Components/GridTemplate";
 
 /* /serach/multi API를 요청했을 경우 조건에 따른 포스터 출력
@@ -70,7 +70,7 @@ const SearchPresenter = ({ results, loading, error, searchValue }) => {
           )}
       </GridTemplate>
       {results.multiResults && results.multiResults.length === 0 && (
-        <Message searchValue={searchValue} />
+        <SearchMessage searchValue={searchValue} />
       )}
     </>
   );

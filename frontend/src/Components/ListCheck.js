@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import StyleButton from "./Button";
 
 const Block = styled.div``;
 
-const ListCheck = ({ userFrom, movieId }) => {
+const ListCheck = ({ userFrom, movieInfo, movieTrue, movieId }) => {
   const [saved, setSaved] = useState(false);
   let variables = {
+    movieTrue,
     userFrom,
+    movieInfo,
     movieId,
   };
-
   useEffect(() => {
     axios.post("/api/mylist/saved", variables).then((response) => {
       if (response.data.success) {
         setSaved(response.data.saved);
-        console.log(saved);
       } else {
         console.log("데이터를 가져오는데 실패하였습니다.");
       }
     });
-  }, []);
+  }, [variables]);
 
   const handleSaved = () => {
-    console.log(saved);
     if (saved) {
       axios.post("/api/mylist/remove", variables).then((response) => {
         if (response.data.success) {
@@ -43,7 +43,11 @@ const ListCheck = ({ userFrom, movieId }) => {
     }
   };
 
-  return <Block onClick={handleSaved}>{saved ? "저장 됨" : "찜하기"}</Block>;
+  return (
+    <StyleButton onClick={handleSaved}>
+      <Block>{saved ? "저장 됨" : "찜하기"}</Block>
+    </StyleButton>
+  );
 };
 
 export default ListCheck;

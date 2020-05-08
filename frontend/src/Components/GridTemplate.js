@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const Block = styled.div`
   margin-top: 5rem;
+  margin-bottom: 10rem;
   padding-left: 4%;
   padding-right: 4%;
 `;

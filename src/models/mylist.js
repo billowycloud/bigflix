@@ -7,11 +7,14 @@ const MyListSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
+    movieInfo: {
+      type: Array,
+    },
     movieId: {
       type: String,
     },
-    movieTitle: {
-      type: String,
+    movieTrue: {
+      type: Boolean,
     },
   },
   { timestamps: true }

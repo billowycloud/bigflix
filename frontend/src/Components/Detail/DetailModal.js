@@ -210,13 +210,12 @@ const DetailModal = ({ onClose, result, isMovie, loading, error }) => {
                     ▶ 재생
                   </StyleButton>
                 )}
-                <StyleButton>
-                  <ListCheck
-                    movieInfo={result}
-                    movieId={result.id}
-                    userFrom={JSON.parse(localStorage.getItem("user"))._id}
-                  />
-                </StyleButton>
+                <ListCheck
+                  movieInfo={result}
+                  userFrom={JSON.parse(localStorage.getItem("user"))._id}
+                  movieTrue={isMovie}
+                  movieId={result.id}
+                />
               </div>
             </Wrapper>
           </Info>

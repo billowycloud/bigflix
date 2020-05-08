@@ -1,3 +1,3 @@
-import MyListContainer from "./MyListContainer";
+import MyList from "./MyList";
 
-export default MyListContainer;
+export default MyList;
