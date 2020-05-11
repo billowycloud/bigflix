@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import DetailModal from "./DetailModal";
 import { movieApi, tvApi } from "../../lib/api/home";
 
-const DetailContainer = ({ id, isMovie, onClose }) => {
+const DetailContainer = ({ id, isMovie, onClose, isPlay }) => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -35,6 +35,7 @@ const DetailContainer = ({ id, isMovie, onClose }) => {
       isMovie={isMovie}
       loading={loading}
       error={error}
+      isPlay={isPlay}
     />
   );
 };

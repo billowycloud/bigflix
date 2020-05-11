@@ -35,12 +35,19 @@ const Overview = styled.p`
 
 const TopSection = ({ result, isMovie }) => {
   const [modal, setModal] = useState(false);
+  const [isPlay, setIsPlay] = useState(false);
 
+  const handlePlay = () => {
+    setModal(true);
+    setIsPlay(true);
+  };
   const handleOpenModal = () => {
     setModal(true);
+    setIsPlay(false);
   };
   const handleCloseModal = () => {
     setModal(false);
+    setIsPlay(false);
   };
   return (
     <>
@@ -49,13 +56,18 @@ const TopSection = ({ result, isMovie }) => {
         <Info>
           <Title>{result.title || result.name}</Title>
           <Overview>&nbsp;{result.overview}</Overview>
-          <StyleButton>▶ 재생</StyleButton>
+          <StyleButton onClick={handlePlay}>▶ 재생</StyleButton>
           <StyleButton onClick={handleOpenModal}>ⓘ 상세 정보</StyleButton>
         </Info>
       </Block>
       {modal && (
         <ModalPortal>
-          <DetailContainer id={result.id} isMovie={isMovie} onClose={handleCloseModal} />
+          <DetailContainer
+            id={result.id}
+            isMovie={isMovie}
+            onClose={handleCloseModal}
+            isPlay={isPlay}
+          />
         </ModalPortal>
       )}
     </>

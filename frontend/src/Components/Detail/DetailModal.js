@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import Loader from "../Loader";
 import { Rating } from "../Contents/Rating";
@@ -7,6 +7,7 @@ import closeIcon from "../../assets/close_white.png";
 import Similar from "../Similar";
 import Season from "../Season";
 import ListCheck from "../ListCheck";
+import { Helmet } from "react-helmet-async";
 const Block = styled.div`
   background: rgba(0, 0, 0, 0.6);
   position: fixed;
@@ -173,12 +174,20 @@ const Opacity = styled.div`
   z-index: 103;
 `;
 
-const DetailModal = ({ onClose, result, isMovie, loading, error }) => {
+const DetailModal = ({ onClose, result, isMovie, loading, error, isPlay }) => {
   const [router, setRouter] = useState(1);
+  useEffect(() => {
+    if (isPlay) {
+      setRouter(4);
+    }
+  }, [isPlay]);
   return loading ? (
     <Loader />
   ) : (
     <Block>
+      <Helmet>
+        <title>Bigflix | {result.title ? result.title : result.name}</title>
+      </Helmet>
       <Content>
         {router === 1 && (
           <Info>
@@ -240,7 +249,11 @@ const DetailModal = ({ onClose, result, isMovie, loading, error }) => {
               height="100%"
               width="100%"
               frameborder="0"
-              src={`https://www.youtube.com/embed/${result.videos.results[0].key}?autoplay=1&amp;version=3&amp;hd=1&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;fs=1`}
+              src={`https://www.youtube.com/embed/${
+                result.videos.results.length > 0
+                  ? result.videos.results[0].key
+                  : alert("본 컨텐츠에 제공될 영상이 없습니다.")
+              }?autoplay=1&amp;version=3&amp;hd=1&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;fs=1`}
               webkitallowfullscreen=""
               mozallowfullscreen=""
               allowfullscreen=""

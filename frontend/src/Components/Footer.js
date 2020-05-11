@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import facebook from "../assets/facebook.png";
 import instagram from "../assets/instagram.png";
-import twitter from "../assets/twitter.png";
+import github from "../assets/github.png";
 
 const Block = styled.div`
   width: 100%;
@@ -32,9 +32,15 @@ const Footer = () => {
   return (
     <Block>
       <SNSBlock>
-        <SNS src={facebook} />
-        <SNS src={instagram} />
-        <SNS src={twitter} />
+        <a href="https://www.facebook.com/" target="blank">
+          <SNS src={facebook} />
+        </a>
+        <a href="https://www.instagram.com/billowy_clouds/" target="blank">
+          <SNS src={instagram} />
+        </a>
+        <a href="https://github.com/billowycloud" target="blank">
+          <SNS src={github} />
+        </a>
       </SNSBlock>
       <Text>
         ⓒ 2020 <span>BillowyCloud</span>
