@@ -1,7 +1,4 @@
-# :movie_camera:넷플릭스 클론(by react)
-
-#yarn add --dev nodemon
-#yarn run dev
+# :movie_camera:넷플릭스 클론(Using react)
 
 - [x] 로그인 화면 | mongoDB
 - [ ] 홈 화면
