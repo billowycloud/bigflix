@@ -18,12 +18,13 @@ const Block = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 101;
 `;
 
 const Content = styled.div`
   background: black;
   width: 100%;
-  height: calc(100vh - 20rem);
+  height: calc(100vh - 10rem);
   position: relative;
 `;
 
