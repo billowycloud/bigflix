@@ -1,4 +1,4 @@
-# :movie_camera:넷플릭스 클론(Using react)
+# :movie_camera:넷플릭스 클론(Using React Hooks)
 
 ## :wave:소개
 
