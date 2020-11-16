@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
+import React from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 
 const Block = styled.div`
   h1 {
@@ -60,8 +60,8 @@ const ErrorMessage = styled.div`
 `;
 
 const textMap = {
-  login: "로그인",
-  register: "회원가입",
+  login: '로그인',
+  register: '회원가입',
 };
 
 const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
@@ -69,7 +69,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
   return (
     <Block>
       <Helmet>
-        <title>Bigflix | {type === "login" ? "로그인" : "회원가입"}</title>
+        <title>Bigflix | {type === 'login' ? '로그인' : '회원가입'}</title>
       </Helmet>
       <h1>{text}</h1>
       <Form onSubmit={onSubmit}>
@@ -89,7 +89,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
           onChange={onChange}
           value={form.password}
         ></Input>
-        {type === "register" && (
+        {type === 'register' && (
           <Input
             autoComplete="new-password-check"
             placeholder="비밀번호 다시 입력"
@@ -100,10 +100,10 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
           />
         )}
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <Button>{type === "login" ? text : "등록"}</Button>
+        <Button>{type === 'login' ? text : '등록'}</Button>
       </Form>
       <Footer>
-        {type === "login" ? (
+        {type === 'login' ? (
           <Link to="/register">회원가입</Link>
         ) : (
           <Link to="/login">로그인</Link>

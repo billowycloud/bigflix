@@ -8,7 +8,7 @@ const jwtMiddleware = async (ctx, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     ctx.state.user = {
       _id: decoded._id,
-      email: decoded.email
+      email: decoded.email,
     };
 
     //토큰 남은 유효 기간이 3.5일 미만이면 재발급
@@ -18,7 +18,7 @@ const jwtMiddleware = async (ctx, next) => {
       const token = user.generateToken();
       ctx.cookies.set('access_token', token, {
         maxAge: 1000 * 60 * 60 * 24 * 7, // 7일
-        httpOnly: true
+        httpOnly: true,
       });
     }
 
